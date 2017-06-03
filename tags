@@ -9,7 +9,7 @@ BoardPane	main.cpp	/^class BoardPane : public Pane$/;"	c	file:
 HIGHT	main.cpp	12;"	d	file:
 InfoPane	main.cpp	/^ 	InfoPane(int y, int x, int h, int w) : Pane(y,x,h,w)$/;"	f	class:InfoPane
 InfoPane	main.cpp	/^class InfoPane : public Pane$/;"	c	file:
-NextPane	main.cpp	/^ 	NextPane(int y, int x, int h, int w) : Pane(y,x,h,w){}$/;"	f	class:NextPane
+NextPane	main.cpp	/^ 	NextPane(int y, int x, int h, int w, int ran) : Pane(y,x,h,w){block_rand=ran;}$/;"	f	class:NextPane
 NextPane	main.cpp	/^class NextPane : public Pane$/;"	c	file:
 Pane	main.cpp	/^Pane::Pane(int y, int x, int h, int w) :y_(y), x_(x),height_(h),width_(w)$/;"	f	class:Pane
 Pane	main.cpp	/^class Pane$/;"	c	file:
@@ -27,6 +27,7 @@ block_info	main.cpp	/^    int block_info[7][5][5]={$/;"	m	class:NextPane	file:
 block_next_block	main.cpp	/^    int block_next_block[5][5]; \/\/ 다음 블록의 시각화 형태 자료$/;"	m	class:NextPane	file:
 block_num	main.cpp	/^    int block_num; \/\/현재블록의 종류 번호$/;"	m	class:BoardPane	file:
 block_num	main.cpp	/^    int block_num;$/;"	m	struct:board_data	file:
+block_rand	main.cpp	/^    int block_rand;$/;"	m	class:NextPane	file:
 board	main.cpp	/^    board_data board[HIGHT+4][WIDTH]; \/\/보드판$/;"	m	class:BoardPane	file:
 board_data	main.cpp	/^typedef struct board_data$/;"	s	file:
 board_data	main.cpp	/^}board_data;$/;"	t	typeref:struct:board_data	file:
@@ -55,7 +56,7 @@ level	main.cpp	/^    int level;$/;"	m	class:Tetris	file:
 main	main.cpp	/^int main()$/;"	f
 make_block	main.cpp	/^void NextPane::make_block()$/;"	f	class:NextPane
 make_data	main.cpp	/^void BoardPane::make_data()$/;"	f	class:BoardPane
-mv_board	main.cpp	/^void BoardPane::mv_board(int go)$/;"	f	class:BoardPane
+mv_block	main.cpp	/^void BoardPane::mv_block(int go)$/;"	f	class:BoardPane
 next_1	main.cpp	/^    NextPane *next_1;$/;"	m	class:Tetris	file:
 next_2	main.cpp	/^    NextPane *next_2;$/;"	m	class:Tetris	file:
 next_block_num	main.cpp	/^    int next_block_num; \/\/다음 블록의 종류 번호$/;"	m	class:NextPane	file:

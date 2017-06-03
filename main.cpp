@@ -108,14 +108,87 @@ class BoardPane : public Pane
     void rotation();
 	void draw();
     void cpy_next();
-    void mv_board(int go);
+    void mv_block(int go);
     bool can_move(int y , int x);
    // bool is_death();
     bool is_touch();
     void freezing();
+    void show_ghost();
    // void check_item();
-   // int bomb();
+    int bomb();
 };
+int BoardPane::bomb()
+{
+    init_pair(20, COLOR_BLUE, COLOR_BLUE);
+    bool bomb_check;
+    int i,j,k,q;
+    int score=0;
+    for(i=HIGHT+2;i>4;i--)
+    {
+        bomb_check = true;
+        for(j=1;j<WIDTH-1;j++)
+        {
+            if(board[i][j].check != 2)
+                bomb_check=false;
+        }
+        if(bomb_check)
+        { //한줄씩 접어버리는 식으로 진행..
+            //여기에 item 체크후 function이 나와야할것 같음.
+            for(k=1;k<WIDTH-1;k++)
+            {
+
+     		        wattron(win_,COLOR_PAIR(20));
+                    mvwaddch(win_,i-4-score,k,ACS_CKBOARD);
+ 		            wattroff(win_,COLOR_PAIR(20));
+                    usleep(10000);
+                    wrefresh(win_);
+            }
+            usleep(10000);
+            for(q=i-1;q>0;q--)
+            {
+                for(k=1;k<WIDTH-1;k++)
+                {
+                    board[q+1][k] = board[q][k];
+                }
+            }
+            score++;
+            i++;
+        }
+    }
+    return score;
+}
+
+void BoardPane::show_ghost()
+{
+    int i,j,k,l;
+    int cnt =0;
+    while(can_move(cnt,0))
+    {cnt++;}
+    if(cnt>2)
+    {
+        for(i=5;i<HIGHT+3;i++)
+        {
+            for(j=1;j<WIDTH-1;j++)
+            {
+                if(board[i][j].check ==1)
+                {
+                    for(k=0;k<5;k++)
+                    {
+                        for(l=0;l<10;l++)
+                        {
+                            if(block_data[k][l]!=0)
+                            {
+                                wattron(win_,COLOR_PAIR(19));
+                                mvwaddch(win_,i-4+k+cnt-1,j-4+l,ACS_CKBOARD);
+                                wattroff(win_,COLOR_PAIR(19));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 void BoardPane::freezing()
 {
     int i,j,k,l;
@@ -179,32 +252,20 @@ bool BoardPane::can_move(int y, int x)
         }
     return true;
 }
-void BoardPane::mv_board(int go)
+void BoardPane::mv_block(int go)
 {
-    int i,j,k,l;
+    int i,j,k,l,cnt;
     int y[4] = {0,0,1,0};
     int x[4] = {2,-2,0,0};
+    cnt =0;
     if(go ==3)
     {
-        while(can_move(1,0))
-        {
-            for(i=0;i<HIGHT+4;i++)
-            {
-                for(j=0;j<WIDTH;j++)
-                {
-                    if(board[i][j].check ==1)
-                    {
-                        board[i][j].check =0;
-                        board[i+1][j].check = 1;
-                        break;
-                    }
-                }
-                if(j!=WIDTH)
-                    break;
-            }
-        }
+        while(can_move(cnt,0))
+        {cnt++;}
+
+        y[3] = cnt-1;
     }
-    else if(can_move(y[go],x[go]))
+    if(can_move(y[go],x[go]))
     {
         for(i=0;i<HIGHT+4;i++)
             for(j=0;j<WIDTH;j++)
@@ -283,7 +344,8 @@ void BoardPane::draw()
  	init_pair(16, COLOR_WHITE, COLOR_WHITE);
  	init_pair(18, COLOR_BLACK, COLOR_BLACK);
  	init_pair(17, COLOR_WHITE, COLOR_WHITE);
-    int i,j,k,l;
+ 	init_pair(19, COLOR_WHITE, COLOR_BLACK);
+    int i,j,k,l,cnt;
     for(i=5;i<HIGHT+3;i++)
     {
         for(j=1;j<WIDTH-1;j++)
@@ -320,6 +382,8 @@ void BoardPane::draw()
             }
         }
     }
+    show_ghost();
+    //ghost
     wrefresh(win_);
 }
 
@@ -350,17 +414,17 @@ class NextPane : public Pane
         {0,0,0,0,0}
     },
     {
-        {0,0,0,0,0},
         {0,0,1,0,0},
         {0,0,2,1,0},
         {0,0,0,1,0},
+        {0,0,0,0,0},
         {0,0,0,0,0}
     },
     {
-        {0,0,0,0,0},
         {0,0,0,1,0},
         {0,0,1,1,0},
         {0,0,2,0,0},
+        {0,0,0,0,0},
         {0,0,0,0,0}
     },
     {
@@ -391,7 +455,12 @@ void NextPane::make_block()
 {
    srand(time(NULL));
    block_rand++;
-   next_block_num = (rand()+block_rand)%7;
+   if((rand()+block_rand)%5 ==0)
+        next_block_num = 6;
+    else if((rand()+block_rand)%5 ==1)
+        next_block_num = 0;
+    else
+        next_block_num = (rand()+block_rand)%7;
    int i,j;
     for(i=0;i<5;i++)
         for(j=0;j<5;j++)
@@ -511,24 +580,44 @@ class Tetris
 	void updateScreen();
     void show_info();
     void detect(BoardPane * player1 , BoardPane * player2);
+    void make_timeterm();
 };
+void Tetris::make_timeterm()
+{
+    int i,input;
+    for(i=0;i<15;i++)
+    {
+        input=getch();
+        control(input);
+        usleep(level);
+    }
+}
 void Tetris::detect(BoardPane * player1 , BoardPane * player2)
 {
     //움직였을때 밑에 있는 블록이랑 닿는다면 freezing을 시킵니다.
     if(player_1->is_touch())
     {
-        player_1->freezing();
-        next_1 ->cpy_next(player_1);
-        next_1 ->make_block();
-        //죽었을때 뜨는 함수를 호출! if(!(player_1->can_move(0,0)))
-        //블럭을 생성하자마자 겹친다면 죽는것임.
+        make_timeterm();//바닥에 닿았을때 움직일수있는 기회를 줍니다.
+        if(player_1->is_touch())
+        {
+            player_1->freezing();
+            player_1->bomb();
+            next_1 ->cpy_next(player_1);
+            next_1 ->make_block();
+            //죽었을때 뜨는 함수를 호출! if(!(player_1->can_move(0,0)))
+         }   //블럭을 생성하자마자 겹친다면 죽는것임.
     }
     if(player_2->is_touch())
     {
-        player_2->freezing();
-        next_2 ->cpy_next(player_2);
-        next_2 ->make_block();
-        //if(!(player_2->can_move(0,0)))// 죽었을때 뜨는 함수를 호출!
+        make_timeterm();
+        if(player_2->is_touch())
+        {
+            player_2->freezing();
+            player_2->bomb();
+            next_2 ->cpy_next(player_2);
+            next_2 ->make_block();
+            //if(!(player_2->can_move(0,0)))// 죽었을때 뜨는 함수를 호출!
+        }
     }
 }
 
@@ -537,19 +626,19 @@ void Tetris::control(int input)
     switch(input)
     {
         case 'f':
-        player_1->mv_board(2);
+        player_1->mv_block(2);
         break;
 
         case 'd':
-        player_1->mv_board(1);
+        player_1->mv_block(1);
         break;
 
         case 'g':
-        player_1->mv_board(0);
+        player_1->mv_block(0);
         break;
 
         case 'z':
-        player_1->mv_board(3);
+        player_1->mv_block(3);
         break;
 
         case 'r':
@@ -557,15 +646,15 @@ void Tetris::control(int input)
         break;
 
         case KEY_DOWN:
-        player_2->mv_board(2);
+        player_2->mv_block(2);
         break;
 
         case KEY_LEFT:
-        player_2->mv_board(1);
+        player_2->mv_block(1);
         break;
 
         case KEY_RIGHT:
-        player_2->mv_board(0);
+        player_2->mv_block(0);
         break;
 
         case KEY_UP:
@@ -573,7 +662,7 @@ void Tetris::control(int input)
         break;
 
         case '.':
-        player_2->mv_board(3);
+        player_2->mv_block(3);
         break;
 
         case 'q':
@@ -632,8 +721,8 @@ void Tetris::play()
 //                mvprintw(0+j,26+l,"%d ",player_1->board[j][l].check);
 //            }
 //        }
-      player_1->mv_board(2);
-      player_2->mv_board(2);
+      player_1->mv_block(2);
+      player_2->mv_block(2);
     }
 }
 Tetris::Tetris()
