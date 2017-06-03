@@ -111,12 +111,39 @@ class BoardPane : public Pane
     void mv_board(int go);
     bool can_move(int y , int x);
    // bool is_death();
-   // bool is_touch();
-   // void freezing();
+    bool is_touch();
+    void freezing();
    // void check_item();
    // int bomb();
 };
-
+void BoardPane::freezing()
+{
+    int i,j,k,l;
+    for(i=0;i<HIGHT+4;i++)
+        {
+            for(j=0;j<WIDTH;j++)
+            {
+                if(board[i][j].check ==1)
+                {
+                    board[i][j].check =0;
+                    for(k=0;k<5;k++)
+                        for(l=0;l<10;l++)
+                            if(block_data[k][l]!=0)
+                            {
+                                board[i+k][j+l-4].check=2;
+                                board[i+k][j+l-4].color=block_num+10;
+                            }
+                }
+            }
+        }
+}
+bool BoardPane::is_touch()
+{
+    if(can_move(1,0))
+        return false;
+    else
+        return true;
+}
 bool BoardPane::can_move(int y, int x)
 {
     int i,j,k,l;
@@ -134,13 +161,12 @@ bool BoardPane::can_move(int y, int x)
             if(board[i][j].check ==2)
                 temp1[i][j] = 1;
 
-            if(board[i][j].check ==1)
+            if(board[i][j].check ==1) //check가 1인곳을 찾아서 그 부분에 블록을 생성해주며 동시에 temp2 배열에 값을 채워서 temp1과 충돌이 일어나는지 확인
             {
                 for(k=0;k<5;k++)
                     for(l=0;l<10;l++)
                         if(block_data[k][l]!=0)
                            temp2[i+y+k][j+x-4+l]=1;
-                           //mvwaddch(win_,i-4+k,j-4+l,ACS_CKBOARD);
             }
         }
     for(i=0;i<HIGHT+4;i++)
@@ -155,7 +181,7 @@ bool BoardPane::can_move(int y, int x)
 }
 void BoardPane::mv_board(int go)
 {
-    int i,j;
+    int i,j,k,l;
     int y[4] = {0,0,1,0};
     int x[4] = {2,-2,0,0};
     if(go ==3)
@@ -230,6 +256,7 @@ void BoardPane::rotation()
         for(j=0;j<5;j++)
             block[i][j] = temp[i][j];
     make_data();
+    //rotation시 충돌이 일어나는지 확인하고 일어난다면 remember 를 이용해서 원래 블록으로 돌아옵니다.
     if(can_move(0,0))
         return;
     else
@@ -239,7 +266,6 @@ void BoardPane::rotation()
                 block[i][j] = remember[i][j];
         make_data();
     }
-    //if can return else change remember
 }
 void BoardPane::draw()
 {
@@ -352,18 +378,20 @@ class NextPane : public Pane
         {0,0,0,0,0}
     },
     };
+    int block_rand;
     int next_block_num; //다음 블록의 종류 번호
     int block_next_block[5][5]; // 다음 블록의 시각화 형태 자료
 	public:
+ 	NextPane(int y, int x, int h, int w, int ran) : Pane(y,x,h,w){block_rand=ran;}
     void cpy_next(BoardPane * board);
     void make_block();
- 	NextPane(int y, int x, int h, int w) : Pane(y,x,h,w){}
  	void draw();
 };
 void NextPane::make_block()
 {
    srand(time(NULL));
-   next_block_num = rand()%7;
+   block_rand++;
+   next_block_num = (rand()+block_rand)%7;
    int i,j;
     for(i=0;i<5;i++)
         for(j=0;j<5;j++)
@@ -479,10 +507,87 @@ class Tetris
 	Tetris();
 	~Tetris();
  	void play();
+    void control(int input);
 	void updateScreen();
     void show_info();
+    void detect(BoardPane * player1 , BoardPane * player2);
 };
+void Tetris::detect(BoardPane * player1 , BoardPane * player2)
+{
+    //움직였을때 밑에 있는 블록이랑 닿는다면 freezing을 시킵니다.
+    if(player_1->is_touch())
+    {
+        player_1->freezing();
+        next_1 ->cpy_next(player_1);
+        next_1 ->make_block();
+        //죽었을때 뜨는 함수를 호출! if(!(player_1->can_move(0,0)))
+        //블럭을 생성하자마자 겹친다면 죽는것임.
+    }
+    if(player_2->is_touch())
+    {
+        player_2->freezing();
+        next_2 ->cpy_next(player_2);
+        next_2 ->make_block();
+        //if(!(player_2->can_move(0,0)))// 죽었을때 뜨는 함수를 호출!
+    }
+}
 
+void Tetris::control(int input)
+{
+    switch(input)
+    {
+        case 'f':
+        player_1->mv_board(2);
+        break;
+
+        case 'd':
+        player_1->mv_board(1);
+        break;
+
+        case 'g':
+        player_1->mv_board(0);
+        break;
+
+        case 'z':
+        player_1->mv_board(3);
+        break;
+
+        case 'r':
+        player_1->rotation();
+        break;
+
+        case KEY_DOWN:
+        player_2->mv_board(2);
+        break;
+
+        case KEY_LEFT:
+        player_2->mv_board(1);
+        break;
+
+        case KEY_RIGHT:
+        player_2->mv_board(0);
+        break;
+
+        case KEY_UP:
+        player_2->rotation();
+        break;
+
+        case '.':
+        player_2->mv_board(3);
+        break;
+
+        case 'q':
+        return;
+
+        case 'p':
+        input =0;
+        while(input != 'p')
+        {
+            input =getch();
+        }
+
+    }
+}
 void Tetris::show_info()
 {
  	init_pair(2, COLOR_BLACK, COLOR_WHITE);
@@ -509,90 +614,27 @@ void Tetris::updateScreen()
 void Tetris::play()
 {
     int input,i;
-    next_1->make_block();
-    next_1->cpy_next(player_1);
-    next_1->make_block();
-    next_2->make_block();
-    next_2->cpy_next(player_2);
-    next_2->make_block();
     while(1)
     {
         for(i=0;i<100;i++)
         {
             input = getch();
-            switch(input)
-            {
-                case 'f':
-                player_1->mv_board(2);
-                break;
-
-                case 'd':
-                player_1->mv_board(1);
-                break;
-
-                case 'g':
-                player_1->mv_board(0);
-                break;
-
-                case 'z':
-                player_1->mv_board(3);
-                break;
-
-                case 'r':
-                player_1->rotation();
-                break;
-
-                case KEY_DOWN:
-                player_2->mv_board(2);
-                break;
-
-                case KEY_LEFT:
-                player_2->mv_board(1);
-                break;
-
-                case KEY_RIGHT:
-                player_2->mv_board(0);
-                break;
-
-                case KEY_UP:
-                player_2->rotation();
-
-                case '.':
-                player_2->mv_board(3);
-                break;
-
-                case 'q':
-                return;
-
-                case 'p':
-                input =0;
-                while(input != 'p')
-                {
-                    input =getch();
-                }
-
-            }
-            /* check 배열을 보고싶으면 주석을 해제하세요
-            for(int j=0;j<HIGHT+4;j++)
-            {
-                for(int l=0;l<WIDTH+2;l++)
-                {
-                    mvprintw(0+j,26+l,"%d ",player_1->board[j][l].check);
-                }
-            }*/
+            control(input);
+            detect(player_1,player_2);
             usleep(level);//이게 0.01초임
-            timer->draw();
             updateScreen();
         }
-
+        // check 배열을 보고싶으면 주석을 해제하세요
+//        for(int j=0;j<HIGHT+4;j++)
+//        {
+//            for(int l=0;l<WIDTH+2;l++)
+//            {
+//                mvprintw(0+j,26+l,"%d ",player_1->board[j][l].check);
+//            }
+//        }
       player_1->mv_board(2);
       player_2->mv_board(2);
-//    next_2->cpy_next(player_2);
-//    next_2->make_block();
-//    next_1->cpy_next(player_1);
-//    next_1->make_block();
     }
-
 }
 Tetris::Tetris()
 {
@@ -621,8 +663,8 @@ Tetris::Tetris()
 
     player_1 = new BoardPane(5,4,HIGHT,WIDTH);
     player_2 = new BoardPane(5,114-(4+22),HIGHT,WIDTH);
-    next_1 = new NextPane(8,33,7,WIDTH);
-    next_2 = new NextPane(8,58,7,WIDTH);
+    next_1 = new NextPane(8,33,7,WIDTH,1);
+    next_2 = new NextPane(8,58,7,WIDTH,4);
     state_1 = new StatePane(17,33,16,WIDTH);
     state_2 = new StatePane(17,58,16,WIDTH);
     timer = new TimerPane(3,47,3,19);
@@ -641,6 +683,14 @@ Tetris::Tetris()
     mvprintw(16,67,"STATE");
 
     mvprintw(2,55,"TIMER");
+
+    next_1->make_block();
+    next_1->cpy_next(player_1);
+    next_1->make_block();
+    next_2->make_block();
+    next_2->cpy_next(player_2);
+    next_2->make_block();
+
     refresh();
 }
 Tetris::~Tetris()

@@ -30,12 +30,15 @@ block_num	main.cpp	/^    int block_num;$/;"	m	struct:board_data	file:
 board	main.cpp	/^    board_data board[HIGHT+4][WIDTH]; \/\/보드판$/;"	m	class:BoardPane	file:
 board_data	main.cpp	/^typedef struct board_data$/;"	s	file:
 board_data	main.cpp	/^}board_data;$/;"	t	typeref:struct:board_data	file:
+can_move	main.cpp	/^bool BoardPane::can_move(int y, int x)$/;"	f	class:BoardPane
 check	main.cpp	/^    bool check;$/;"	m	class:BoardPane	file:
 check	main.cpp	/^    int check;$/;"	m	struct:board_data	file:
 color	main.cpp	/^    int color;$/;"	m	struct:board_data	file:
+control	main.cpp	/^void Tetris::control(int input)$/;"	f	class:Tetris
 cpy_next	main.cpp	/^void NextPane::cpy_next(BoardPane * boardpane)$/;"	f	class:NextPane
 dead_time_sec	main.cpp	/^    int dead_time_sec;$/;"	m	class:TimerPane	file:
 dead_time_usec	main.cpp	/^    int dead_time_usec;$/;"	m	class:TimerPane	file:
+detect	main.cpp	/^void Tetris::detect(BoardPane * player1 , BoardPane * player2)$/;"	f	class:Tetris
 draw	main.cpp	/^void BoardPane::draw()$/;"	f	class:BoardPane
 draw	main.cpp	/^void InfoPane::draw()$/;"	f	class:InfoPane
 draw	main.cpp	/^void NextPane::draw()$/;"	f	class:NextPane
@@ -43,16 +46,20 @@ draw	main.cpp	/^void Pane::draw()$/;"	f	class:Pane
 draw	main.cpp	/^void StatePane::draw()$/;"	f	class:StatePane
 draw	main.cpp	/^void TimerPane::draw()$/;"	f	class:TimerPane
 end	main.cpp	/^    struct timeval st,end;$/;"	m	class:TimerPane	typeref:struct:TimerPane::	file:
+freezing	main.cpp	/^void BoardPane::freezing()$/;"	f	class:BoardPane
 height_	main.cpp	/^ 	int width_, height_;$/;"	m	class:Pane	file:
 infoPane_	main.cpp	/^    InfoPane *infoPane_;$/;"	m	class:Tetris	file:
+is_touch	main.cpp	/^bool BoardPane::is_touch()$/;"	f	class:BoardPane
 item	main.cpp	/^    int item;$/;"	m	struct:board_data	file:
-level	main.cpp	/^    int level;$/;"	m	class:BoardPane	file:
+level	main.cpp	/^    int level;$/;"	m	class:Tetris	file:
 main	main.cpp	/^int main()$/;"	f
 make_block	main.cpp	/^void NextPane::make_block()$/;"	f	class:NextPane
 make_data	main.cpp	/^void BoardPane::make_data()$/;"	f	class:BoardPane
+mv_board	main.cpp	/^void BoardPane::mv_board(int go)$/;"	f	class:BoardPane
 next_1	main.cpp	/^    NextPane *next_1;$/;"	m	class:Tetris	file:
 next_2	main.cpp	/^    NextPane *next_2;$/;"	m	class:Tetris	file:
 next_block_num	main.cpp	/^    int next_block_num; \/\/다음 블록의 종류 번호$/;"	m	class:NextPane	file:
+play	main.cpp	/^void Tetris::play()$/;"	f	class:Tetris
 player_1	main.cpp	/^    BoardPane *player_1;$/;"	m	class:Tetris	file:
 player_2	main.cpp	/^    BoardPane *player_2;$/;"	m	class:Tetris	file:
 rotate_num	main.cpp	/^    int rotate_num;$/;"	m	struct:board_data	file:
