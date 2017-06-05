@@ -61,6 +61,11 @@ class InfoPane : public Pane
 	public:
  	InfoPane(int y, int x, int h, int w) : Pane(y,x,h,w)
     {}
+    ~InfoPane()
+    {
+        wclear(win_);
+        wrefresh(win_);
+    }
 
     void draw();
 };
@@ -102,6 +107,11 @@ class BoardPane : public Pane
                 board[i][j].check=0;
                 board[i][j].block_num=0;
             }
+    }
+    ~BoardPane()
+    {
+        wclear(win_);
+        wrefresh(win_);
     }
     void make_new_block();
     void make_data();
@@ -447,6 +457,11 @@ class NextPane : public Pane
     int block_next_block[5][5]; // 다음 블록의 시각화 형태 자료
 	public:
  	NextPane(int y, int x, int h, int w, int ran) : Pane(y,x,h,w){block_rand=ran;}
+    ~NextPane()
+    {
+        wclear(win_);
+        wrefresh(win_);
+    }
     void cpy_next(BoardPane * board);
     void make_block();
  	void draw();
@@ -529,14 +544,28 @@ void NextPane::draw()
 
 class StatePane : public Pane
 {
+    private:
+    int score;
+    int status;
+    const char *table[2]={{"normal"},{"hard"}};
 	public:
- 	StatePane(int y, int x, int h, int w) : Pane(y,x,h,w){}
+ 	StatePane(int y, int x, int h, int w) : Pane(y,x,h,w){score=0;status=0;}
+    ~StatePane()
+    {
+
+        wclear(win_);
+        wrefresh(win_);
+    }
+    void add_score(int s){score += s;}
+    int return_score(void){return score;}
  	void draw();
 };
 void StatePane::draw()
 {
  	box(win_, 0, 0);
     wrefresh(win_);
+    mvwprintw(win_,4,2,"SCORE   :  %d ",score);
+    mvwprintw(win_,6,2,"STATUS  :  %s ",table[status]);
 }
 
 class TimerPane : public Pane
@@ -549,8 +578,18 @@ class TimerPane : public Pane
     {
         gettimeofday(&st,NULL);
     }
+    ~TimerPane()
+    {
+        wclear(win_);
+        wrefresh(win_);
+    }
  	void draw();
+    int time_return();
 };
+int TimerPane::time_return()
+{
+    return dead_time_sec;
+}
 void TimerPane::draw()
 {
     gettimeofday(&end,NULL);
@@ -560,7 +599,37 @@ void TimerPane::draw()
     box(win_, 0, 0);
     wrefresh(win_);
 }
+class EndPane : public Pane
+{
+    private:
+    int win_num;
+    const char *id[2] = {{"Player 2 win!!"},{"Player 1 win!!"}};
+	public:
+ 	EndPane(int y, int x, int h, int w,int win) : Pane(y,x,h,w)
+    {win_num = win;}
 
+    void draw();
+};
+
+void EndPane::draw()
+{
+    clear();
+    refresh();
+    attron(COLOR_PAIR(3));
+    border('*', '*', '*', '*', '*', '*', '*', '*');
+	mvprintw(3,50, "  congratuation!  ");
+	mvprintw(6,50, "  %s  ",id[win_num]);
+	mvprintw(10,45, "  You can press 'q' to exit  ",id[win_num]);
+    attroff(COLOR_PAIR(3));
+ 	refresh();
+    int input =0;
+    while(1)
+    {
+        input = getch();
+        if(input == 'q')
+            return;
+    }
+}
 class Tetris
 {
     int level;
@@ -574,14 +643,36 @@ class Tetris
     TimerPane *timer;
     public:
 	Tetris();
-	~Tetris();
- 	void play();
+	~Tetris( );
+ 	int play();
     void control(int input);
 	void updateScreen();
     void show_info();
-    void detect(BoardPane * player1 , BoardPane * player2);
+    int detect(BoardPane * player1 , BoardPane * player2);
     void make_timeterm();
+    void base_screen_show();
 };
+void Tetris::base_screen_show()
+{
+    attron(COLOR_PAIR(1));
+    border('*', '*', '*', '*', '*', '*', '*', '*');
+    attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(1));
+    mvprintw(3,11,"PLYAER 1");
+    mvprintw(3,95,"PLYAER 2");
+    attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(3));
+    mvprintw(7,39,"NEXT BLOCK");
+    mvprintw(7,64,"NEXT BLOCK");
+    attroff(COLOR_PAIR(3));
+
+    mvprintw(16,42,"STATE");
+    mvprintw(16,67,"STATE");
+
+    mvprintw(2,55,"TIMER");
+}
 void Tetris::make_timeterm()
 {
     int i,input;
@@ -592,8 +683,9 @@ void Tetris::make_timeterm()
         usleep(level);
     }
 }
-void Tetris::detect(BoardPane * player1 , BoardPane * player2)
+int Tetris::detect(BoardPane * player1 , BoardPane * player2)
 {
+    int bomb_line,i;
     //움직였을때 밑에 있는 블록이랑 닿는다면 freezing을 시킵니다.
     if(player_1->is_touch())
     {
@@ -601,9 +693,17 @@ void Tetris::detect(BoardPane * player1 , BoardPane * player2)
         if(player_1->is_touch())
         {
             player_1->freezing();
-            player_1->bomb();
+            bomb_line = player_1->bomb();
+            //블럭을 터트리는 순간 상대방 블럭을 아래로 떨어뜨립니다
+            for(i=0;i<bomb_line*2;i++)
+                control(KEY_DOWN);
+            state_1->add_score(bomb_line*10);
             next_1 ->cpy_next(player_1);
             next_1 ->make_block();
+            if(!(player_1->can_move(0,0)))
+                return 1;
+
+
             //죽었을때 뜨는 함수를 호출! if(!(player_1->can_move(0,0)))
          }   //블럭을 생성하자마자 겹친다면 죽는것임.
     }
@@ -613,12 +713,26 @@ void Tetris::detect(BoardPane * player1 , BoardPane * player2)
         if(player_2->is_touch())
         {
             player_2->freezing();
-            player_2->bomb();
+            bomb_line = player_2->bomb();
+            for(i=0;i<bomb_line*2;i++)
+                control('f');
+            state_2->add_score(bomb_line);
             next_2 ->cpy_next(player_2);
             next_2 ->make_block();
+            if(!(player_2->can_move(0,0)))
+                return 2;
             //if(!(player_2->can_move(0,0)))// 죽었을때 뜨는 함수를 호출!
         }
     }
+    //시간이 다되면 포인트 높은 사람이 이깁니다.
+    if(timer->time_return() < 0)
+    {
+        if((state_1->return_score()) > (state_2->return_score()))
+            return 2;
+        else
+            return 1;
+    }
+    return 0;
 }
 
 void Tetris::control(int input)
@@ -700,20 +814,22 @@ void Tetris::updateScreen()
     state_2->draw();
     timer ->draw();
 }
-void Tetris::play()
+int Tetris::play()
 {
-    int input,i;
+    int input,i,win;
     while(1)
     {
         for(i=0;i<100;i++)
         {
             input = getch();
             control(input);
-            detect(player_1,player_2);
+            win = detect(player_1,player_2);
             usleep(level);//이게 0.01초임
             updateScreen();
+            if(win != 0)
+                break;
         }
-        // check 배열을 보고싶으면 주석을 해제하세요
+//         check 배열을 보고싶으면 주석을 해제하세요
 //        for(int j=0;j<HIGHT+4;j++)
 //        {
 //            for(int l=0;l<WIDTH+2;l++)
@@ -721,9 +837,14 @@ void Tetris::play()
 //                mvprintw(0+j,26+l,"%d ",player_1->board[j][l].check);
 //            }
 //        }
+        if(win != 0)
+            break;
       player_1->mv_block(2);
       player_2->mv_block(2);
     }
+    EndPane * endgame = new EndPane(0,0,35,115,win-1);
+    endgame->draw();
+    return win;
 }
 Tetris::Tetris()
 {
@@ -758,20 +879,7 @@ Tetris::Tetris()
     state_2 = new StatePane(17,58,16,WIDTH);
     timer = new TimerPane(3,47,3,19);
 
-    attron(COLOR_PAIR(1));
-    mvprintw(3,11,"PLYAER 1");
-    mvprintw(3,95,"PLYAER 2");
-    attroff(COLOR_PAIR(1));
-
-    attron(COLOR_PAIR(3));
-    mvprintw(7,39,"NEXT BLOCK");
-    mvprintw(7,64,"NEXT BLOCK");
-    attroff(COLOR_PAIR(3));
-
-    mvprintw(16,42,"STATE");
-    mvprintw(16,67,"STATE");
-
-    mvprintw(2,55,"TIMER");
+    base_screen_show();
 
     next_1->make_block();
     next_1->cpy_next(player_1);
@@ -784,11 +892,19 @@ Tetris::Tetris()
 }
 Tetris::~Tetris()
 {
- 	endwin();
+   delete player_1;
+   delete next_1;
+   delete state_1;
+   delete player_2;
+   delete next_2;
+   delete state_2;
+   delete timer;
+   endwin();
 }
 
 int main()
 {
-    Tetris t;
-    t.play();
+    Tetris *t = new Tetris;
+    t->play();
+    delete t;
 }
