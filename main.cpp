@@ -56,6 +56,63 @@ void Pane::draw()
  	wrefresh(win_);
 }
 
+class TimerPane : public Pane
+{
+	public:
+    struct timeval st,end;
+    int dead_time_sec;
+    int dead_time_usec;
+ 	TimerPane(int y, int x, int h, int w) : Pane(y,x,h,w)
+    {
+        gettimeofday(&st,NULL);
+    }
+    ~TimerPane()
+    {
+        wclear(win_);
+        wrefresh(win_);
+    }
+ 	void draw();
+    int time_return();
+};
+class StatePane : public Pane
+{
+    public:
+    int status;
+    private:
+    int score;
+    struct timeval transe;
+    const char *table[2]={{"normal"},{"transe"}};
+	public:
+ 	StatePane(int y, int x, int h, int w) : Pane(y,x,h,w){score=0;status=0;}
+    ~StatePane()
+    {
+
+        wclear(win_);
+        wrefresh(win_);
+    }
+    void add_score(int s){score += s;}
+    int return_score(void){return score;}
+ 	void draw();
+    void make_transe();
+    void check_time(TimerPane * timer);
+};
+void StatePane::check_time(TimerPane * timer)
+{
+    if(timer->end.tv_sec-transe.tv_sec >10)
+        status = 0;
+}
+void StatePane::make_transe()
+{
+    status = 1;
+    gettimeofday(&transe,NULL);
+}
+void StatePane::draw()
+{
+ 	box(win_, 0, 0);
+    wrefresh(win_);
+    mvwprintw(win_,4,2,"SCORE   :  %d ",score);
+    mvwprintw(win_,6,2,"STATUS  :  %s ",table[status]);
+}
 class InfoPane : public Pane
 {
 	public:
@@ -124,22 +181,84 @@ class BoardPane : public Pane
     bool is_touch();
     void freezing();
     void show_ghost();
+    int transe_bomb();
+    void transe_draw();
    // void check_item();
-    int bomb();
+    int bomb(StatePane * anotherPlayer);
 };
-int BoardPane::bomb()
+void BoardPane::transe_draw()
+{
+
+ int i,j,k,l,cnt;
+
+    for(i=5;i<HIGHT+3;i++)
+    {
+        for(j=1;j<WIDTH-1;j++)
+        {
+ 		        wattron(win_,COLOR_PAIR(18));
+                mvwaddch(win_,i-4,j,ACS_CKBOARD);
+ 		        wattroff(win_,COLOR_PAIR(18));
+        }
+    }
+ for(i=5;i<HIGHT+3;i++)
+    {
+        for(j=1;j<WIDTH-1;j++)
+        {
+            if(board[i][j].check ==2 && board[i][j].item != 2)
+            {
+ 		        wattron(win_,COLOR_PAIR(board[i][j].color));
+                mvwaddch(win_,HIGHT-1-(i-4),j,ACS_CKBOARD);
+                wattroff(win_,COLOR_PAIR(board[i][j].color));
+            }
+            else if(board[i][j].check ==2 && (board[i][j].item ==2 || board[i][j].item ==3))
+            {
+
+ 		        wattron(win_,COLOR_PAIR(14));
+                mvwaddch(win_,HIGHT-1-(i-4),j,ACS_DEGREE);
+ 		        wattroff(win_,COLOR_PAIR(14));
+            }
+            else if(board[i][j].check ==1)//그리는 함수 호출
+            {
+                for(k=0;k<5;k++)
+                {
+                    for(l=0;l<10;l++)
+                    {
+                        if(block_data[k][l]==1|| block_data[k][l]== 2)
+                        {
+ 		                    wattron(win_,COLOR_PAIR(block_num+10));
+                            mvwaddch(win_,HIGHT-1-(i-4+k),j-4+l,ACS_CKBOARD);
+ 		                    wattroff(win_,COLOR_PAIR(block_num+10));
+                        }
+                        else if(block_data[k][l]>=3)
+                        {
+ 		                    wattron(win_,COLOR_PAIR(14));
+                            mvwaddch(win_,HIGHT-1-(i-4+k),j-4+l,ACS_DEGREE);
+ 		                    wattroff(win_,COLOR_PAIR(14));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    wrefresh(win_);
+}
+int BoardPane::bomb(StatePane * anotherPlayer)
 {
     init_pair(20, COLOR_BLUE, COLOR_BLUE);
     bool bomb_check;
+    bool item_check;
     int i,j,k,q;
     int score=0;
     for(i=HIGHT+2;i>4;i--)
     {
         bomb_check = true;
+        item_check = false;
         for(j=1;j<WIDTH-1;j++)
         {
             if(board[i][j].check != 2)
                 bomb_check=false;
+            if(board[i][j].item == 2)
+                item_check = true;
         }
         if(bomb_check)
         { //한줄씩 접어버리는 식으로 진행..
@@ -164,10 +283,52 @@ int BoardPane::bomb()
             score++;
             i++;
         }
+        if(item_check&&bomb_check)
+            anotherPlayer->make_transe();
     }
     return score;
 }
 
+int BoardPane::transe_bomb()
+{
+    init_pair(20, COLOR_BLUE, COLOR_BLUE);
+    bool bomb_check;
+    int i,j,k,q;
+    int score=0;
+    for(i=HIGHT+2;i>4;i--)
+    {
+        bomb_check = true;
+        for(j=1;j<WIDTH-1;j++)
+        {
+            if(board[i][j].check != 2)
+                bomb_check=false;
+        }
+        if(bomb_check)
+        { //한줄씩 접어버리는 식으로 진행..
+            //여기에 item 체크후 function이 나와야할것 같음.
+            for(k=1;k<WIDTH-1;k++)
+            {
+
+     		        wattron(win_,COLOR_PAIR(20));
+                    mvwaddch(win_,HIGHT-1-(i-4-score),k,ACS_CKBOARD);
+ 		            wattroff(win_,COLOR_PAIR(20));
+                    usleep(10000);
+                    wrefresh(win_);
+            }
+            usleep(10000);
+            for(q=i-1;q>0;q--)
+            {
+                for(k=1;k<WIDTH-1;k++)
+                {
+                    board[q+1][k] = board[q][k];
+                }
+            }
+            score++;
+            i++;
+        }
+    }
+    return score;
+}
 void BoardPane::show_ghost()
 {
     int i,j,k,l;
@@ -211,11 +372,19 @@ void BoardPane::freezing()
                     board[i][j].check =0;
                     for(k=0;k<5;k++)
                         for(l=0;l<10;l++)
-                            if(block_data[k][l]!=0)
+                        {
+                            if(block_data[k][l]==1 || block_data[k][l] == 2)
                             {
                                 board[i+k][j+l-4].check=2;
                                 board[i+k][j+l-4].color=block_num+10;
                             }
+                            if(block_data[k][l]>=3)
+                            {
+                                board[i+k][j+l-4].check=2;
+                                board[i+k][j+l-4].item=2;
+                                board[i+k][j+l-4].color=14;
+                            }
+                        }
                 }
             }
         }
@@ -297,10 +466,15 @@ void BoardPane::make_data()
     {
         for(j=0;j<5;j++)
         {
-            if(block[i][j] != 0)
+            if(block[i][j] == 1)
             {
                 block_data[i][j*2] =1;
                 block_data[i][j*2+1] =1;
+            }
+            else if(block[i][j] >1)
+            {
+                block_data[i][j*2] =block[i][j];
+                block_data[i][j*2+1] =block[i][j];
             }
             else
             {
@@ -369,11 +543,18 @@ void BoardPane::draw()
     {
         for(j=1;j<WIDTH-1;j++)
         {
-            if(board[i][j].check ==2)
+            if(board[i][j].check ==2 && board[i][j].item != 2)
             {
  		        wattron(win_,COLOR_PAIR(board[i][j].color));
                 mvwaddch(win_,i-4,j,ACS_CKBOARD);
                 wattroff(win_,COLOR_PAIR(board[i][j].color));
+            }
+            else if(board[i][j].check ==2 && (board[i][j].item ==2 || board[i][j].item ==3))
+            {
+
+ 		        wattron(win_,COLOR_PAIR(14));
+                mvwaddch(win_,i-4,j,ACS_DEGREE);
+ 		        wattroff(win_,COLOR_PAIR(14));
             }
             else if(board[i][j].check ==1)//그리는 함수 호출
             {
@@ -381,18 +562,25 @@ void BoardPane::draw()
                 {
                     for(l=0;l<10;l++)
                     {
-                        if(block_data[k][l]!=0)
+                        if(block_data[k][l]==1|| block_data[k][l]== 2)
                         {
  		                    wattron(win_,COLOR_PAIR(block_num+10));
                             mvwaddch(win_,i-4+k,j-4+l,ACS_CKBOARD);
  		                    wattroff(win_,COLOR_PAIR(block_num+10));
+                        }
+                        else if(block_data[k][l]>=3)
+                        {
+ 		                    wattron(win_,COLOR_PAIR(14));
+                            mvwaddch(win_,i-4+k,j-4+l,ACS_DEGREE);
+ 		                    wattroff(win_,COLOR_PAIR(14));
                         }
                     }
                 }
             }
         }
     }
-    show_ghost();
+
+   show_ghost();
     //ghost
     wrefresh(win_);
 }
@@ -405,7 +593,7 @@ class NextPane : public Pane
     {
         {0,0,0,0,0},
         {0,0,1,1,0},
-        {0,0,1,1,0},
+        {0,0,2,1,0},
         {0,0,0,0,0},
         {0,0,0,0,0}
     },
@@ -470,6 +658,7 @@ void NextPane::make_block()
 {
    srand(time(NULL));
    block_rand++;
+   //o-block 이랑 막대 블록 생성확률을 더 높여서 난이도를 낮췄습니다.
    if((rand()+block_rand)%5 ==0)
         next_block_num = 6;
     else if((rand()+block_rand)%5 ==1)
@@ -480,12 +669,12 @@ void NextPane::make_block()
     for(i=0;i<5;i++)
         for(j=0;j<5;j++)
             block_next_block[i][j] = block_info[next_block_num][i][j];
-    if(rand()%8 ==0) //1/8 확률로 아이템 생성
+    if(rand()%13 ==0) //1/13 확률로 아이템 생성
     {
         for(i=0;i<5;i++)
             for(j=0;j<5;j++)
                 if(block_next_block[i][j] ==2)
-                    block_next_block[i][j] = rand()%3+2;//item 이 있다면 2~4까지 숫자를 가질것.
+                    block_next_block[i][j] = rand()%2+3;//item 이 있다면 2~3까지 숫자를 가질것.
     }
 }
 void NextPane::cpy_next(BoardPane * boardpane)
@@ -531,61 +720,26 @@ void NextPane::draw()
     for(i=0;i<5;i++)
         for(j=0;j<5;j++)
         {
-            if(block_next_block[i][j] !=0)
+            if(block_next_block[i][j] ==1 || block_next_block[i][j] ==2 )
             {
  		        wattron(win_,COLOR_PAIR(next_block_num+10));
                 mvwaddch(win_,i+2,6+j*2,ACS_CKBOARD);
                 mvwaddch(win_,i+2,6+j*2+1,ACS_CKBOARD);
  		        wattroff(win_,COLOR_PAIR(next_block_num+10));
             }
+
+            else if(block_next_block[i][j]>=3)
+            {
+                wattron(win_,COLOR_PAIR(14));
+                mvwaddch(win_,i+2,6+j*2,ACS_BULLET);
+                mvwaddch(win_,i+2,6+j*2+1,ACS_DEGREE);
+                wattroff(win_,COLOR_PAIR(14));
+            }
         }
     wrefresh(win_);
 }
 
-class StatePane : public Pane
-{
-    private:
-    int score;
-    int status;
-    const char *table[2]={{"normal"},{"hard"}};
-	public:
- 	StatePane(int y, int x, int h, int w) : Pane(y,x,h,w){score=0;status=0;}
-    ~StatePane()
-    {
 
-        wclear(win_);
-        wrefresh(win_);
-    }
-    void add_score(int s){score += s;}
-    int return_score(void){return score;}
- 	void draw();
-};
-void StatePane::draw()
-{
- 	box(win_, 0, 0);
-    wrefresh(win_);
-    mvwprintw(win_,4,2,"SCORE   :  %d ",score);
-    mvwprintw(win_,6,2,"STATUS  :  %s ",table[status]);
-}
-
-class TimerPane : public Pane
-{
-	public:
-    struct timeval st,end;
-    int dead_time_sec;
-    int dead_time_usec;
- 	TimerPane(int y, int x, int h, int w) : Pane(y,x,h,w)
-    {
-        gettimeofday(&st,NULL);
-    }
-    ~TimerPane()
-    {
-        wclear(win_);
-        wrefresh(win_);
-    }
- 	void draw();
-    int time_return();
-};
 int TimerPane::time_return()
 {
     return dead_time_sec;
@@ -676,7 +830,7 @@ void Tetris::base_screen_show()
 void Tetris::make_timeterm()
 {
     int i,input;
-    for(i=0;i<15;i++)
+    for(i=0;i<10;i++)
     {
         input=getch();
         control(input);
@@ -693,8 +847,11 @@ int Tetris::detect(BoardPane * player1 , BoardPane * player2)
         if(player_1->is_touch())
         {
             player_1->freezing();
-            bomb_line = player_1->bomb();
             //블럭을 터트리는 순간 상대방 블럭을 아래로 떨어뜨립니다
+            if(state_1->status ==1)
+                bomb_line = player_1->transe_bomb();
+            else
+                 bomb_line = player_1->bomb(state_2);
             for(i=0;i<bomb_line*2;i++)
                 control(KEY_DOWN);
             state_1->add_score(bomb_line*10);
@@ -713,10 +870,14 @@ int Tetris::detect(BoardPane * player1 , BoardPane * player2)
         if(player_2->is_touch())
         {
             player_2->freezing();
-            bomb_line = player_2->bomb();
+            if(state_2->status ==1)
+                bomb_line = player_2->transe_bomb();
+            else
+                 bomb_line = player_2->bomb(state_1);
+            bomb_line = player_2->bomb(state_1);
             for(i=0;i<bomb_line*2;i++)
                 control('f');
-            state_2->add_score(bomb_line);
+            state_2->add_score(bomb_line*10);
             next_2 ->cpy_next(player_2);
             next_2 ->make_block();
             if(!(player_2->can_move(0,0)))
@@ -724,6 +885,8 @@ int Tetris::detect(BoardPane * player1 , BoardPane * player2)
             //if(!(player_2->can_move(0,0)))// 죽었을때 뜨는 함수를 호출!
         }
     }
+    state_2->check_time(timer);
+    state_1->check_time(timer);
     //시간이 다되면 포인트 높은 사람이 이깁니다.
     if(timer->time_return() < 0)
     {
@@ -806,8 +969,14 @@ void Tetris::show_info()
 
 void Tetris::updateScreen()
 {
-    player_1->draw();
-    player_2->draw();
+    if(state_1->status ==1)
+        player_1->transe_draw();
+    else
+        player_1->draw();
+    if(state_2->status ==1)
+        player_2->transe_draw();
+    else
+        player_2->draw();
     next_1->draw();
     next_2->draw();
     state_1->draw();
