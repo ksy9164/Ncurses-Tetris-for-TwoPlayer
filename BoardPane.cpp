@@ -312,7 +312,7 @@ void BoardPane::rotation()
 
     for(i=0;i<5;i++)
         for(j=0;j<5;j++)
-            temp[i][j] = block[4-j][i];
+            temp[i][j] = block[j][4-i];
 
     for(i=0;i<5;i++)
         for(j=0;j<5;j++)

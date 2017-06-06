@@ -2,11 +2,6 @@
 #define __TET_H__ 1
 #include"tetris.h"
 #endif
-
-
-
-
-
 int main()
 {
     Tetris *t = new Tetris;
