@@ -27,7 +27,7 @@ void Tetris::base_screen_show()
 void Tetris::make_timeterm()
 {
     int i,input;
-    for(i=0;i<10;i++)
+    for(i=0;i<13;i++)
     {
         input=getch();
         control(input);
@@ -86,8 +86,10 @@ int Tetris::detect(BoardPane * player1 , BoardPane * player2)
     {
         if((state_1->return_score()) > (state_2->return_score()))
             return 2;
-        else
+        else if((state_1->return_score()) < (state_2->return_score()))
             return 1;
+        else
+            return 3;
     }
     return 0;
 }
@@ -142,7 +144,9 @@ void Tetris::control(int input)
         {
             input =getch();
         }
-
+        gettimeofday(&timer->end,NULL);
+        gettimeofday(&timer->st,NULL);
+        (timer->st.tv_sec)-=TIME_LIMIT - (timer->dead_time_sec);
     }
 }
 void Tetris::show_info()
@@ -230,8 +234,8 @@ Tetris::Tetris()
     player_2 = new BoardPane(5,114-(4+22),HIGHT,WIDTH);
     next_1 = new NextPane(8,33,7,WIDTH,1);
     next_2 = new NextPane(8,58,7,WIDTH,4);
-    state_1 = new StatePane(17,33,16,WIDTH);
-    state_2 = new StatePane(17,58,16,WIDTH);
+    state_1 = new StatePane(17,33,12,WIDTH);
+    state_2 = new StatePane(17,58,12,WIDTH);
     timer = new TimerPane(3,47,3,19);
 
     base_screen_show();

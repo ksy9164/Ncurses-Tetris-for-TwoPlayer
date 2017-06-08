@@ -124,20 +124,16 @@ class BoardPane : public Pane
         wclear(win_);
         wrefresh(win_);
     }
-    void make_new_block();
     void make_data();
     void rotation();
 	void draw();
-    void cpy_next();
     void mv_block(int go);
     bool can_move(int y , int x);
-   // bool is_death();
     bool is_touch();
     void freezing();
     void show_ghost();
     int transe_bomb();
     void transe_draw();
-   // void check_item();
     int bomb(StatePane * anotherPlayer);
 };
 class NextPane : public Pane
@@ -213,7 +209,7 @@ class EndPane : public Pane
 {
     private:
     int win_num;
-    const char *id[2] = {{"Player 2 win!!"},{"Player 1 win!!"}};
+    const char *id[3] = {{"Player 2 win!!"},{"Player 1 win!!"},{"    draw!!"}};
 	public:
  	EndPane(int y, int x, int h, int w,int win) : Pane(y,x,h,w)
     {win_num = win;}
