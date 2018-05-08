@@ -192,6 +192,11 @@ initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * n
    chopstick_reset(R3_F);
 }
 
+//int get_time(ProcessInfo * p) //result 파일에서 가장 최근에 끝난 프로세스에 찍힌 시간을 들고옵니다.
+//{
+//    int current_time = Load(R_F); // Read Result file (current time)
+//    return current_time;
+//}
 AppendToFile(ProcessInfo * prc , int val , char * filename)
 {
     FILE * in = fopen(filename,"a");
@@ -224,6 +229,94 @@ Signal(CondVar *c)
     Re_Con(c);
 }
 
+//Broadcast(CondVar *c)
+//{
+//    int number = Load(c->queueLength);
+//    for(int i=0;i<number;i++)
+//        Re_Con(c);
+//}
+//
+//int check_AW_AR()
+//{
+//    int aw,ar;
+//    aw = Load(AW_F);
+//    ar = Load(AR_F);
+//    return ((aw+ar)>0?1:0);
+//}
+//int check_AW_WW()
+//{
+//    int aw,ww;
+//    aw = Load(AW_F);
+//    ww = Load(WW_F);
+//    return ((aw+ww)>0?1:0);
+//}
+//
+//write(ProcessInfo *p , Lock *lock, CondVar * reader, CondVar * writer)
+//{
+//    Acquire(lock);   // lock.Acquire()
+//    while(check_AW_AR())
+//    {
+//        Wait(p,writer,lock,WW_F);
+//    }
+//    //write down Active Reader file
+//    
+//    AppendToFile(p,get_time(p),1,AW_F); //AW로 넣어줍니다.
+//
+//    if(p->sleep_time > get_time(p)) // 현재시간을 찾습니다.
+//        p->c_time = p->sleep_time;
+//    else
+//       p->c_time = get_time(p);
+//
+//    Release(lock);
+//    
+//    sleep(p->act_time); // 문서 작성중...
+//    
+//    Acquire(lock);  // lock.Acquire()
+//    
+//    //write result file (time)
+//    AppendToFile(p,get_time(p),p->c_time + p->act_time,R_F);
+//        
+//    //finish write, write in AW file
+//    AppendToFile(p,get_time(p),0,AW_F);
+//    
+//    if(Load(WW_F)>0)
+//        Signal(writer);
+//    else if(Load(WR_F)>0)
+//        Broadcast(reader);
+//    Release(lock);
+//}
+//
+//read(ProcessInfo *p , Lock *lock, CondVar * reader, CondVar * writer)
+//{
+//    Acquire(lock);   // lock.Acquire()
+//    while(check_AW_WW())
+//    {
+//        Wait(p,reader,lock,WR_F);
+//    }
+//    //write down Active Reader file
+//    AppendToFile(p,get_time(p),Load(AR_F)+1,AR_F);
+//    
+//    if(p->sleep_time > get_time(p))
+//        p->c_time = p->sleep_time;
+//    else
+//       p->c_time = get_time(p);
+//
+//    Release(lock);
+//    
+//    sleep(p->act_time);
+//    
+//    Acquire(lock);   // lock.Acquire()
+//    
+//    //write result file (time)
+//    AppendToFile(p,get_time(p),p->c_time + p->act_time,R_F);
+//    
+//    //finish read, write in AR file
+//    AppendToFile(p, get_time(p) ,Load(AR_F)-1,AR_F);
+//    
+//    if(Load(AR_F) == 0 && Load(WW_F)>0)
+//        Signal(writer);
+//    Release(lock);
+//}
 //sleep func
 void think(int time)
 {
@@ -328,6 +421,7 @@ Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar
     Put_R2(prc,lock_r2,con_r2);
     Put_R3(prc,lock_r3,con_r3);
 }
+
 Phil_C(ProcessInfo *prc ,Lock *lock_r3, Lock *lock_r1 ,CondVar *con_r3 , CondVar *con_r1)
 {	
     Take_R3(prc,lock_r3,con_r3);
@@ -341,7 +435,6 @@ Phil_C(ProcessInfo *prc ,Lock *lock_r3, Lock *lock_r1 ,CondVar *con_r3 , CondVar
     Put_R3(prc,lock_r3,con_r3);
     Put_R1(prc,lock_r1,con_r1);
 }
-
 void main(void)
 {
     //  $ ipcs                 // 남아 있는 세마포 확인
@@ -372,11 +465,11 @@ void main(void)
     ProcessInfo prc;  // 현재 process 정보
     //process has name , thinking time , eating time
     
-    initProcessInfo(&prc,1,1,"Philo_B");
+    initProcessInfo(&prc,1,1,"Philo_C");
     //파일 초기화가 엮이지 않게 하기위해서, sleep 을 잠깐 걸어둡니다.
     sleep(1);
     //
-    for(int i=0;i<100;i++)
-        Phil_B(&prc,&lock_r2,&lock_r3,&con_r2,&con_r3);
+    for(int i=0;i<20;i++)
+        Phil_C(&prc,&lock_r3,&lock_r1,&con_r3,&con_r1);
 }
 

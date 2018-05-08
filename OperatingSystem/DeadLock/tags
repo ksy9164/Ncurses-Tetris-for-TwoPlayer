@@ -1,0 +1,180 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Ac_Con	monitor.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	philA.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	philB.c	/^Ac_Con(CondVar * c)$/;"	f
+Acquire	monitor.c	/^Acquire(Lock *l)$/;"	f
+Acquire	philA.c	/^Acquire(Lock *l)$/;"	f
+Acquire	philB.c	/^Acquire(Lock *l)$/;"	f
+AppendToFile	monitor.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	philA.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	philB.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+CondVar	monitor.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	philA.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	philB.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+FALSE	monitor.c	10;"	d	file:
+FALSE	philA.c	10;"	d	file:
+FALSE	philB.c	10;"	d	file:
+Load	monitor.c	/^int Load(char *fileVar) {$/;"	f
+Load	philA.c	/^int Load(char *fileVar) {$/;"	f
+Load	philB.c	/^int Load(char *fileVar) {$/;"	f
+Lock	monitor.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	philA.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	philB.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Phil_A	monitor.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	philA.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	philB.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_B	monitor.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	philA.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	philB.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+ProcessInfo	monitor.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	philA.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	philB.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+Put_R1	monitor.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	philA.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	philB.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	monitor.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	philA.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	philB.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	monitor.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	philA.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	philB.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+R1_F	monitor.c	12;"	d	file:
+R1_F	philA.c	12;"	d	file:
+R1_F	philB.c	12;"	d	file:
+R1_Q	monitor.c	15;"	d	file:
+R1_Q	philA.c	15;"	d	file:
+R1_Q	philB.c	15;"	d	file:
+R2_F	monitor.c	13;"	d	file:
+R2_F	philA.c	13;"	d	file:
+R2_F	philB.c	13;"	d	file:
+R2_Q	monitor.c	16;"	d	file:
+R2_Q	philA.c	16;"	d	file:
+R2_Q	philB.c	16;"	d	file:
+R3_F	monitor.c	14;"	d	file:
+R3_F	philA.c	14;"	d	file:
+R3_F	philB.c	14;"	d	file:
+R3_Q	monitor.c	17;"	d	file:
+R3_Q	philA.c	17;"	d	file:
+R3_Q	philB.c	17;"	d	file:
+Re_Con	monitor.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	philA.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	philB.c	/^Re_Con(CondVar * c)$/;"	f
+Release	monitor.c	/^Release(Lock *l)$/;"	f
+Release	philA.c	/^Release(Lock *l)$/;"	f
+Release	philB.c	/^Release(Lock *l)$/;"	f
+SEMPERM	monitor.c	8;"	d	file:
+SEMPERM	philA.c	8;"	d	file:
+SEMPERM	philB.c	8;"	d	file:
+Signal	monitor.c	/^Signal(CondVar *c)$/;"	f
+Signal	philA.c	/^Signal(CondVar *c)$/;"	f
+Signal	philB.c	/^Signal(CondVar *c)$/;"	f
+Store	monitor.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	philA.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	philB.c	/^Store(char *fileVar,int i) {$/;"	f
+TRUE	monitor.c	9;"	d	file:
+TRUE	philA.c	9;"	d	file:
+TRUE	philB.c	9;"	d	file:
+Take_R1	monitor.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	philA.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	philB.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R2	monitor.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	philA.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	philB.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	monitor.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	philA.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	philB.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Wait	monitor.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	philA.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	philB.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+_cond	monitor.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	philA.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	philB.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_lock	monitor.c	/^typedef struct _lock { $/;"	s	file:
+_lock	philA.c	/^typedef struct _lock { $/;"	s	file:
+_lock	philB.c	/^typedef struct _lock { $/;"	s	file:
+_process	monitor.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	philA.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	philB.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_semun	monitor.c	/^typedef union   _semun$/;"	u	file:
+_semun	philA.c	/^typedef union   _semun$/;"	u	file:
+_semun	philB.c	/^typedef union   _semun$/;"	u	file:
+add	monitor.c	/^add(char *fileVar,int i) {$/;"	f
+add	philA.c	/^add(char *fileVar,int i) {$/;"	f
+add	philB.c	/^add(char *fileVar,int i) {$/;"	f
+array	monitor.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	philA.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	philB.c	/^     ushort *array;$/;"	m	union:_semun	file:
+buf	monitor.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	philA.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	philB.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+chopstick_reset	monitor.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	philA.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	philB.c	/^chopstick_reset(char  *fileVar)$/;"	f
+deQueue_Process	monitor.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	philA.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	philB.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+eat	monitor.c	/^void eat(int time)$/;"	f
+eat	philA.c	/^void eat(int time)$/;"	f
+eat	philB.c	/^void eat(int time)$/;"	f
+eating_time	monitor.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	philA.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	philB.c	/^    int eating_time;$/;"	m	struct:_process	file:
+enQueue_Process	monitor.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	philA.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	philB.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+initCondVar	monitor.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	philA.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	philB.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initLock	monitor.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	philA.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	philB.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initProcessInfo	monitor.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	philA.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	philB.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initsem	monitor.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	philA.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	philB.c	/^int initsem (key_t semkey, int n)$/;"	f
+main	monitor.c	/^void main(void)$/;"	f
+main	philA.c	/^void main(void)$/;"	f
+main	philB.c	/^void main(void)$/;"	f
+name	monitor.c	/^    char * name;$/;"	m	struct:_process	file:
+name	philA.c	/^    char * name;$/;"	m	struct:_process	file:
+name	philB.c	/^    char * name;$/;"	m	struct:_process	file:
+p	monitor.c	/^int p (int semid)$/;"	f
+p	philA.c	/^int p (int semid)$/;"	f
+p	philB.c	/^int p (int semid)$/;"	f
+queueLength	monitor.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	philA.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	philB.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+reset	monitor.c	/^reset(char *fileVar) {$/;"	f
+reset	philA.c	/^reset(char *fileVar) {$/;"	f
+reset	philB.c	/^reset(char *fileVar) {$/;"	f
+semid	monitor.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	monitor.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	philA.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	philA.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	philB.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	philB.c	/^   int semid;$/;"	m	struct:_lock	file:
+semun	monitor.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	philA.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	philB.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+sub	monitor.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	philA.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	philB.c	/^sub(char *fileVar,int i) {$/;"	f
+think	monitor.c	/^void think(int time)$/;"	f
+think	philA.c	/^void think(int time)$/;"	f
+think	philB.c	/^void think(int time)$/;"	f
+thinking_time	monitor.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	philA.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	philB.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+v	monitor.c	/^int v (int semid)$/;"	f
+v	philA.c	/^int v (int semid)$/;"	f
+v	philB.c	/^int v (int semid)$/;"	f
+val	monitor.c	/^     int val;$/;"	m	union:_semun	file:
+val	philA.c	/^     int val;$/;"	m	union:_semun	file:
+val	philB.c	/^     int val;$/;"	m	union:_semun	file:
