@@ -372,7 +372,8 @@ void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)
 {
     Acquire(lock);
     AppendToFile(prc,1,R1_F); //Store(R1,1) 대신에 파일에 어느 철학자 인지와 값을 저장해 놓음
-    Signal(c);
+    if(Load(R1_Q) != 0)
+        Signal(c);
     printf("%s Putdown R1 !\n",prc->name);
     Release(lock);
 }
@@ -380,7 +381,8 @@ void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)
 {
     Acquire(lock);
     AppendToFile(prc,1,R2_F); //Store(R2,1) 대신에 파일에 어느 철학자 인지와 값을 저장해 놓음
-    Signal(c);
+    if(Load(R2_Q) != 0)
+        Signal(c);
     printf("%s Putdown R2 !\n",prc->name);
     Release(lock);
 }
@@ -389,11 +391,11 @@ void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)
 {
     Acquire(lock);
     AppendToFile(prc,1,R3_F); //Store(R3,1) 대신에 파일에 어느 철학자 인지와 값을 저장해 놓음
-    Signal(c);
+    if(Load(R3_Q) != 0)
+        Signal(c);
     printf("%s Putdown R3 !\n",prc->name);
     Release(lock);
 }
-
 Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)
 {	
     Take_R1(prc,lock_r1,con_r1);
