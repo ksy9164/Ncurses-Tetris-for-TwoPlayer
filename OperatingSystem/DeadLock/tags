@@ -4,177 +4,361 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-Ac_Con	monitor.c	/^Ac_Con(CondVar * c)$/;"	f
-Ac_Con	philA.c	/^Ac_Con(CondVar * c)$/;"	f
-Ac_Con	philB.c	/^Ac_Con(CondVar * c)$/;"	f
-Acquire	monitor.c	/^Acquire(Lock *l)$/;"	f
-Acquire	philA.c	/^Acquire(Lock *l)$/;"	f
-Acquire	philB.c	/^Acquire(Lock *l)$/;"	f
-AppendToFile	monitor.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
-AppendToFile	philA.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
-AppendToFile	philB.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
-CondVar	monitor.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
-CondVar	philA.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
-CondVar	philB.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
-FALSE	monitor.c	10;"	d	file:
-FALSE	philA.c	10;"	d	file:
-FALSE	philB.c	10;"	d	file:
-Load	monitor.c	/^int Load(char *fileVar) {$/;"	f
-Load	philA.c	/^int Load(char *fileVar) {$/;"	f
-Load	philB.c	/^int Load(char *fileVar) {$/;"	f
-Lock	monitor.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
-Lock	philA.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
-Lock	philB.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
-Phil_A	monitor.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
-Phil_A	philA.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
-Phil_A	philB.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
-Phil_B	monitor.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
-Phil_B	philA.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
-Phil_B	philB.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
-ProcessInfo	monitor.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
-ProcessInfo	philA.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
-ProcessInfo	philB.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
-Put_R1	monitor.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R1	philA.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R1	philB.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R2	monitor.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R2	philA.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R2	philB.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R3	monitor.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R3	philA.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-Put_R3	philB.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
-R1_F	monitor.c	12;"	d	file:
-R1_F	philA.c	12;"	d	file:
-R1_F	philB.c	12;"	d	file:
-R1_Q	monitor.c	15;"	d	file:
-R1_Q	philA.c	15;"	d	file:
-R1_Q	philB.c	15;"	d	file:
-R2_F	monitor.c	13;"	d	file:
-R2_F	philA.c	13;"	d	file:
-R2_F	philB.c	13;"	d	file:
-R2_Q	monitor.c	16;"	d	file:
-R2_Q	philA.c	16;"	d	file:
-R2_Q	philB.c	16;"	d	file:
-R3_F	monitor.c	14;"	d	file:
-R3_F	philA.c	14;"	d	file:
-R3_F	philB.c	14;"	d	file:
-R3_Q	monitor.c	17;"	d	file:
-R3_Q	philA.c	17;"	d	file:
-R3_Q	philB.c	17;"	d	file:
-Re_Con	monitor.c	/^Re_Con(CondVar * c)$/;"	f
-Re_Con	philA.c	/^Re_Con(CondVar * c)$/;"	f
-Re_Con	philB.c	/^Re_Con(CondVar * c)$/;"	f
-Release	monitor.c	/^Release(Lock *l)$/;"	f
-Release	philA.c	/^Release(Lock *l)$/;"	f
-Release	philB.c	/^Release(Lock *l)$/;"	f
-SEMPERM	monitor.c	8;"	d	file:
-SEMPERM	philA.c	8;"	d	file:
-SEMPERM	philB.c	8;"	d	file:
-Signal	monitor.c	/^Signal(CondVar *c)$/;"	f
-Signal	philA.c	/^Signal(CondVar *c)$/;"	f
-Signal	philB.c	/^Signal(CondVar *c)$/;"	f
-Store	monitor.c	/^Store(char *fileVar,int i) {$/;"	f
-Store	philA.c	/^Store(char *fileVar,int i) {$/;"	f
-Store	philB.c	/^Store(char *fileVar,int i) {$/;"	f
-TRUE	monitor.c	9;"	d	file:
-TRUE	philA.c	9;"	d	file:
-TRUE	philB.c	9;"	d	file:
-Take_R1	monitor.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
-Take_R1	philA.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
-Take_R1	philB.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
-Take_R2	monitor.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
-Take_R2	philA.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
-Take_R2	philB.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
-Take_R3	monitor.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
-Take_R3	philA.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
-Take_R3	philB.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
-Wait	monitor.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
-Wait	philA.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
-Wait	philB.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
-_cond	monitor.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
-_cond	philA.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
-_cond	philB.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
-_lock	monitor.c	/^typedef struct _lock { $/;"	s	file:
-_lock	philA.c	/^typedef struct _lock { $/;"	s	file:
-_lock	philB.c	/^typedef struct _lock { $/;"	s	file:
-_process	monitor.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
-_process	philA.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
-_process	philB.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
-_semun	monitor.c	/^typedef union   _semun$/;"	u	file:
-_semun	philA.c	/^typedef union   _semun$/;"	u	file:
-_semun	philB.c	/^typedef union   _semun$/;"	u	file:
-add	monitor.c	/^add(char *fileVar,int i) {$/;"	f
-add	philA.c	/^add(char *fileVar,int i) {$/;"	f
-add	philB.c	/^add(char *fileVar,int i) {$/;"	f
-array	monitor.c	/^     ushort *array;$/;"	m	union:_semun	file:
-array	philA.c	/^     ushort *array;$/;"	m	union:_semun	file:
-array	philB.c	/^     ushort *array;$/;"	m	union:_semun	file:
-buf	monitor.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
-buf	philA.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
-buf	philB.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
-chopstick_reset	monitor.c	/^chopstick_reset(char  *fileVar)$/;"	f
-chopstick_reset	philA.c	/^chopstick_reset(char  *fileVar)$/;"	f
-chopstick_reset	philB.c	/^chopstick_reset(char  *fileVar)$/;"	f
-deQueue_Process	monitor.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
-deQueue_Process	philA.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
-deQueue_Process	philB.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
-eat	monitor.c	/^void eat(int time)$/;"	f
-eat	philA.c	/^void eat(int time)$/;"	f
-eat	philB.c	/^void eat(int time)$/;"	f
-eating_time	monitor.c	/^    int eating_time;$/;"	m	struct:_process	file:
-eating_time	philA.c	/^    int eating_time;$/;"	m	struct:_process	file:
-eating_time	philB.c	/^    int eating_time;$/;"	m	struct:_process	file:
-enQueue_Process	monitor.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
-enQueue_Process	philA.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
-enQueue_Process	philB.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
-initCondVar	monitor.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
-initCondVar	philA.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
-initCondVar	philB.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
-initLock	monitor.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
-initLock	philA.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
-initLock	philB.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
-initProcessInfo	monitor.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
-initProcessInfo	philA.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
-initProcessInfo	philB.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
-initsem	monitor.c	/^int initsem (key_t semkey, int n)$/;"	f
-initsem	philA.c	/^int initsem (key_t semkey, int n)$/;"	f
-initsem	philB.c	/^int initsem (key_t semkey, int n)$/;"	f
-main	monitor.c	/^void main(void)$/;"	f
-main	philA.c	/^void main(void)$/;"	f
-main	philB.c	/^void main(void)$/;"	f
-name	monitor.c	/^    char * name;$/;"	m	struct:_process	file:
-name	philA.c	/^    char * name;$/;"	m	struct:_process	file:
-name	philB.c	/^    char * name;$/;"	m	struct:_process	file:
-p	monitor.c	/^int p (int semid)$/;"	f
-p	philA.c	/^int p (int semid)$/;"	f
-p	philB.c	/^int p (int semid)$/;"	f
-queueLength	monitor.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
-queueLength	philA.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
-queueLength	philB.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
-reset	monitor.c	/^reset(char *fileVar) {$/;"	f
-reset	philA.c	/^reset(char *fileVar) {$/;"	f
-reset	philB.c	/^reset(char *fileVar) {$/;"	f
-semid	monitor.c	/^   int semid;$/;"	m	struct:_cond	file:
-semid	monitor.c	/^   int semid;$/;"	m	struct:_lock	file:
-semid	philA.c	/^   int semid;$/;"	m	struct:_cond	file:
-semid	philA.c	/^   int semid;$/;"	m	struct:_lock	file:
-semid	philB.c	/^   int semid;$/;"	m	struct:_cond	file:
-semid	philB.c	/^   int semid;$/;"	m	struct:_lock	file:
-semun	monitor.c	/^} semun;$/;"	t	typeref:union:_semun	file:
-semun	philA.c	/^} semun;$/;"	t	typeref:union:_semun	file:
-semun	philB.c	/^} semun;$/;"	t	typeref:union:_semun	file:
-sub	monitor.c	/^sub(char *fileVar,int i) {$/;"	f
-sub	philA.c	/^sub(char *fileVar,int i) {$/;"	f
-sub	philB.c	/^sub(char *fileVar,int i) {$/;"	f
-think	monitor.c	/^void think(int time)$/;"	f
-think	philA.c	/^void think(int time)$/;"	f
-think	philB.c	/^void think(int time)$/;"	f
-thinking_time	monitor.c	/^    int thinking_time;$/;"	m	struct:_process	file:
-thinking_time	philA.c	/^    int thinking_time;$/;"	m	struct:_process	file:
-thinking_time	philB.c	/^    int thinking_time;$/;"	m	struct:_process	file:
-v	monitor.c	/^int v (int semid)$/;"	f
-v	philA.c	/^int v (int semid)$/;"	f
-v	philB.c	/^int v (int semid)$/;"	f
-val	monitor.c	/^     int val;$/;"	m	union:_semun	file:
-val	philA.c	/^     int val;$/;"	m	union:_semun	file:
-val	philB.c	/^     int val;$/;"	m	union:_semun	file:
+Ac_Con	avoidDeadLock.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	deadlock.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	pa.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	pb.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	pc.c	/^Ac_Con(CondVar * c)$/;"	f
+Ac_Con	preventionPC.c	/^Ac_Con(CondVar * c)$/;"	f
+Acquire	avoidDeadLock.c	/^Acquire(Lock *l)$/;"	f
+Acquire	deadlock.c	/^Acquire(Lock *l)$/;"	f
+Acquire	pa.c	/^Acquire(Lock *l)$/;"	f
+Acquire	pb.c	/^Acquire(Lock *l)$/;"	f
+Acquire	pc.c	/^Acquire(Lock *l)$/;"	f
+Acquire	preventionPC.c	/^Acquire(Lock *l)$/;"	f
+AppendToFile	avoidDeadLock.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	deadlock.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	pa.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	pb.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	pc.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+AppendToFile	preventionPC.c	/^AppendToFile(ProcessInfo * prc , int val , char * filename)$/;"	f
+CondVar	avoidDeadLock.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	deadlock.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	pa.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	pb.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	pc.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+CondVar	preventionPC.c	/^} CondVar;$/;"	t	typeref:struct:_cond	file:
+FALSE	avoidDeadLock.c	10;"	d	file:
+FALSE	deadlock.c	10;"	d	file:
+FALSE	pa.c	10;"	d	file:
+FALSE	pb.c	10;"	d	file:
+FALSE	pc.c	10;"	d	file:
+FALSE	preventionPC.c	10;"	d	file:
+Load	avoidDeadLock.c	/^int Load(char *fileVar) {$/;"	f
+Load	deadlock.c	/^int Load(char *fileVar) {$/;"	f
+Load	pa.c	/^int Load(char *fileVar) {$/;"	f
+Load	pb.c	/^int Load(char *fileVar) {$/;"	f
+Load	pc.c	/^int Load(char *fileVar) {$/;"	f
+Load	preventionPC.c	/^int Load(char *fileVar) {$/;"	f
+Lock	avoidDeadLock.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	deadlock.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	pa.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	pb.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	pc.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Lock	preventionPC.c	/^} Lock;$/;"	t	typeref:struct:_lock	file:
+Phil_A	avoidDeadLock.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	deadlock.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	pa.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	pb.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	pc.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_A	preventionPC.c	/^Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)$/;"	f
+Phil_B	avoidDeadLock.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	deadlock.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	pa.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	pb.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	pc.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_B	preventionPC.c	/^Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)$/;"	f
+Phil_C	avoidDeadLock.c	/^Phil_C(ProcessInfo *prc ,Lock *lock_r3, Lock *lock_r1 ,CondVar *con_r3 , CondVar *con_r1)$/;"	f
+Phil_C	deadlock.c	/^Phil_C(ProcessInfo *prc ,Lock *lock_r3, Lock *lock_r1 ,CondVar *con_r3 , CondVar *con_r1)$/;"	f
+Phil_C	pc.c	/^Phil_C(ProcessInfo *prc ,Lock *lock_r3, Lock *lock_r1 ,CondVar *con_r3 , CondVar *con_r1)$/;"	f
+Phil_C	preventionPC.c	/^Phil_C(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r3 ,CondVar *con_r1 , CondVar *con_r3)$/;"	f
+ProcessInfo	avoidDeadLock.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	deadlock.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	pa.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	pb.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	pc.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+ProcessInfo	preventionPC.c	/^}ProcessInfo;$/;"	t	typeref:struct:_process	file:
+Put_R1	avoidDeadLock.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	deadlock.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	pa.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	pb.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	pc.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R1	preventionPC.c	/^void Put_R1(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	avoidDeadLock.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	deadlock.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	pa.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	pb.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	pc.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R2	preventionPC.c	/^void Put_R2(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	avoidDeadLock.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	deadlock.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	pa.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	pb.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	pc.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+Put_R3	preventionPC.c	/^void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)$/;"	f
+R1_F	avoidDeadLock.c	12;"	d	file:
+R1_F	deadlock.c	12;"	d	file:
+R1_F	pa.c	12;"	d	file:
+R1_F	pb.c	12;"	d	file:
+R1_F	pc.c	12;"	d	file:
+R1_F	preventionPC.c	12;"	d	file:
+R1_Q	avoidDeadLock.c	15;"	d	file:
+R1_Q	deadlock.c	15;"	d	file:
+R1_Q	pa.c	15;"	d	file:
+R1_Q	pb.c	15;"	d	file:
+R1_Q	pc.c	15;"	d	file:
+R1_Q	preventionPC.c	15;"	d	file:
+R2_F	avoidDeadLock.c	13;"	d	file:
+R2_F	deadlock.c	13;"	d	file:
+R2_F	pa.c	13;"	d	file:
+R2_F	pb.c	13;"	d	file:
+R2_F	pc.c	13;"	d	file:
+R2_F	preventionPC.c	13;"	d	file:
+R2_Q	avoidDeadLock.c	16;"	d	file:
+R2_Q	deadlock.c	16;"	d	file:
+R2_Q	pa.c	16;"	d	file:
+R2_Q	pb.c	16;"	d	file:
+R2_Q	pc.c	16;"	d	file:
+R2_Q	preventionPC.c	16;"	d	file:
+R3_F	avoidDeadLock.c	14;"	d	file:
+R3_F	deadlock.c	14;"	d	file:
+R3_F	pa.c	14;"	d	file:
+R3_F	pb.c	14;"	d	file:
+R3_F	pc.c	14;"	d	file:
+R3_F	preventionPC.c	14;"	d	file:
+R3_Q	avoidDeadLock.c	17;"	d	file:
+R3_Q	deadlock.c	17;"	d	file:
+R3_Q	pa.c	17;"	d	file:
+R3_Q	pb.c	17;"	d	file:
+R3_Q	pc.c	17;"	d	file:
+R3_Q	preventionPC.c	17;"	d	file:
+Re_Con	avoidDeadLock.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	deadlock.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	pa.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	pb.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	pc.c	/^Re_Con(CondVar * c)$/;"	f
+Re_Con	preventionPC.c	/^Re_Con(CondVar * c)$/;"	f
+Release	avoidDeadLock.c	/^Release(Lock *l)$/;"	f
+Release	deadlock.c	/^Release(Lock *l)$/;"	f
+Release	pa.c	/^Release(Lock *l)$/;"	f
+Release	pb.c	/^Release(Lock *l)$/;"	f
+Release	pc.c	/^Release(Lock *l)$/;"	f
+Release	preventionPC.c	/^Release(Lock *l)$/;"	f
+SEMPERM	avoidDeadLock.c	8;"	d	file:
+SEMPERM	deadlock.c	8;"	d	file:
+SEMPERM	pa.c	8;"	d	file:
+SEMPERM	pb.c	8;"	d	file:
+SEMPERM	pc.c	8;"	d	file:
+SEMPERM	preventionPC.c	8;"	d	file:
+Signal	avoidDeadLock.c	/^Signal(CondVar *c)$/;"	f
+Signal	deadlock.c	/^Signal(CondVar *c)$/;"	f
+Signal	pa.c	/^Signal(CondVar *c)$/;"	f
+Signal	pb.c	/^Signal(CondVar *c)$/;"	f
+Signal	pc.c	/^Signal(CondVar *c)$/;"	f
+Signal	preventionPC.c	/^Signal(CondVar *c)$/;"	f
+Store	avoidDeadLock.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	deadlock.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	pa.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	pb.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	pc.c	/^Store(char *fileVar,int i) {$/;"	f
+Store	preventionPC.c	/^Store(char *fileVar,int i) {$/;"	f
+TRUE	avoidDeadLock.c	9;"	d	file:
+TRUE	deadlock.c	9;"	d	file:
+TRUE	pa.c	9;"	d	file:
+TRUE	pb.c	9;"	d	file:
+TRUE	pc.c	9;"	d	file:
+TRUE	preventionPC.c	9;"	d	file:
+Take_R1	avoidDeadLock.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	deadlock.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	pa.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	pb.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	pc.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R1	preventionPC.c	/^void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)$/;"	f
+Take_R2	avoidDeadLock.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	deadlock.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	pa.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	pb.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	pc.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R2	preventionPC.c	/^void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	avoidDeadLock.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	deadlock.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	pa.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	pb.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	pc.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Take_R3	preventionPC.c	/^void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )$/;"	f
+Wait	avoidDeadLock.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	deadlock.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	pa.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	pb.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	pc.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+Wait	preventionPC.c	/^Wait(ProcessInfo *prc, CondVar *c, Lock *lock, char* filename)$/;"	f
+_cond	avoidDeadLock.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	deadlock.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	pa.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	pb.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	pc.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_cond	preventionPC.c	/^typedef struct _cond \/\/ file 1개가 1개의 conditional val$/;"	s	file:
+_lock	avoidDeadLock.c	/^typedef struct _lock { $/;"	s	file:
+_lock	deadlock.c	/^typedef struct _lock { $/;"	s	file:
+_lock	pa.c	/^typedef struct _lock { $/;"	s	file:
+_lock	pb.c	/^typedef struct _lock { $/;"	s	file:
+_lock	pc.c	/^typedef struct _lock { $/;"	s	file:
+_lock	preventionPC.c	/^typedef struct _lock { $/;"	s	file:
+_process	avoidDeadLock.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	deadlock.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	pa.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	pb.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	pc.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_process	preventionPC.c	/^typedef struct _process \/\/ 기본적인 프로세스의 정보를 저장하는 클래스가 있으면 유용할것 같았습니다.$/;"	s	file:
+_semun	avoidDeadLock.c	/^typedef union   _semun$/;"	u	file:
+_semun	deadlock.c	/^typedef union   _semun$/;"	u	file:
+_semun	pa.c	/^typedef union   _semun$/;"	u	file:
+_semun	pb.c	/^typedef union   _semun$/;"	u	file:
+_semun	pc.c	/^typedef union   _semun$/;"	u	file:
+_semun	preventionPC.c	/^typedef union   _semun$/;"	u	file:
+add	avoidDeadLock.c	/^add(char *fileVar,int i) {$/;"	f
+add	deadlock.c	/^add(char *fileVar,int i) {$/;"	f
+add	pa.c	/^add(char *fileVar,int i) {$/;"	f
+add	pb.c	/^add(char *fileVar,int i) {$/;"	f
+add	pc.c	/^add(char *fileVar,int i) {$/;"	f
+add	preventionPC.c	/^add(char *fileVar,int i) {$/;"	f
+array	avoidDeadLock.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	deadlock.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	pa.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	pb.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	pc.c	/^     ushort *array;$/;"	m	union:_semun	file:
+array	preventionPC.c	/^     ushort *array;$/;"	m	union:_semun	file:
+buf	avoidDeadLock.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	deadlock.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	pa.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	pb.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	pc.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+buf	preventionPC.c	/^     struct semid_ds *buf;$/;"	m	union:_semun	typeref:struct:_semun::semid_ds	file:
+chopstick_reset	avoidDeadLock.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	deadlock.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	pa.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	pb.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	pc.c	/^chopstick_reset(char  *fileVar)$/;"	f
+chopstick_reset	preventionPC.c	/^chopstick_reset(char  *fileVar)$/;"	f
+deQueue_Process	avoidDeadLock.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	deadlock.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	pa.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	pb.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	pc.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+deQueue_Process	preventionPC.c	/^deQueue_Process(ProcessInfo *p ,  CondVar * c , char *filename)$/;"	f
+eat	avoidDeadLock.c	/^void eat(int time)$/;"	f
+eat	deadlock.c	/^void eat(int time)$/;"	f
+eat	pa.c	/^void eat(int time)$/;"	f
+eat	pb.c	/^void eat(int time)$/;"	f
+eat	pc.c	/^void eat(int time)$/;"	f
+eat	preventionPC.c	/^void eat(int time)$/;"	f
+eating_time	avoidDeadLock.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	deadlock.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	pa.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	pb.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	pc.c	/^    int eating_time;$/;"	m	struct:_process	file:
+eating_time	preventionPC.c	/^    int eating_time;$/;"	m	struct:_process	file:
+enQueue_Process	avoidDeadLock.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	deadlock.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	pa.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	pb.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	pc.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+enQueue_Process	preventionPC.c	/^enQueue_Process(ProcessInfo *p ,  CondVar * c , char * filename)$/;"	f
+initCondVar	avoidDeadLock.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	deadlock.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	pa.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	pb.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	pc.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initCondVar	preventionPC.c	/^initCondVar(CondVar *c, key_t semkey, char *queueLength) \/\/queue length  파일이름$/;"	f
+initLock	avoidDeadLock.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	deadlock.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	pa.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	pb.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	pc.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initLock	preventionPC.c	/^initLock(Lock *l, key_t semkey) {$/;"	f
+initProcessInfo	avoidDeadLock.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	deadlock.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	pa.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	pb.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	pc.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initProcessInfo	preventionPC.c	/^initProcessInfo(ProcessInfo * prc, int eating_time , int thinking_time, char * name)$/;"	f
+initsem	avoidDeadLock.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	deadlock.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	pa.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	pb.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	pc.c	/^int initsem (key_t semkey, int n)$/;"	f
+initsem	preventionPC.c	/^int initsem (key_t semkey, int n)$/;"	f
+main	avoidDeadLock.c	/^void main(void)$/;"	f
+main	deadlock.c	/^void main(void)$/;"	f
+main	pa.c	/^void main(void)$/;"	f
+main	pb.c	/^void main(void)$/;"	f
+main	pc.c	/^void main(void)$/;"	f
+main	preventionPC.c	/^void main(void)$/;"	f
+name	avoidDeadLock.c	/^    char * name;$/;"	m	struct:_process	file:
+name	deadlock.c	/^    char * name;$/;"	m	struct:_process	file:
+name	pa.c	/^    char * name;$/;"	m	struct:_process	file:
+name	pb.c	/^    char * name;$/;"	m	struct:_process	file:
+name	pc.c	/^    char * name;$/;"	m	struct:_process	file:
+name	preventionPC.c	/^    char * name;$/;"	m	struct:_process	file:
+p	avoidDeadLock.c	/^int p (int semid)$/;"	f
+p	deadlock.c	/^int p (int semid)$/;"	f
+p	pa.c	/^int p (int semid)$/;"	f
+p	pb.c	/^int p (int semid)$/;"	f
+p	pc.c	/^int p (int semid)$/;"	f
+p	preventionPC.c	/^int p (int semid)$/;"	f
+pid	avoidDeadLock.c	/^    pid_t pid; $/;"	m	struct:_process	file:
+pid	deadlock.c	/^    pid_t pid; $/;"	m	struct:_process	file:
+pid	pa.c	/^    pid_t pid; $/;"	m	struct:_process	file:
+pid	pb.c	/^    pid_t pid; $/;"	m	struct:_process	file:
+pid	pc.c	/^    pid_t pid; $/;"	m	struct:_process	file:
+pid	preventionPC.c	/^    pid_t pid; $/;"	m	struct:_process	file:
+queueLength	avoidDeadLock.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	deadlock.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	pa.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	pb.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	pc.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+queueLength	preventionPC.c	/^   char *queueLength; \/\/ 파일이름$/;"	m	struct:_cond	file:
+reset	avoidDeadLock.c	/^reset(char *fileVar) {$/;"	f
+reset	deadlock.c	/^reset(char *fileVar) {$/;"	f
+reset	pa.c	/^reset(char *fileVar) {$/;"	f
+reset	pb.c	/^reset(char *fileVar) {$/;"	f
+reset	pc.c	/^reset(char *fileVar) {$/;"	f
+reset	preventionPC.c	/^reset(char *fileVar) {$/;"	f
+semid	avoidDeadLock.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	avoidDeadLock.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	deadlock.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	deadlock.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	pa.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	pa.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	pb.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	pb.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	pc.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	pc.c	/^   int semid;$/;"	m	struct:_lock	file:
+semid	preventionPC.c	/^   int semid;$/;"	m	struct:_cond	file:
+semid	preventionPC.c	/^   int semid;$/;"	m	struct:_lock	file:
+semun	avoidDeadLock.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	deadlock.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	pa.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	pb.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	pc.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+semun	preventionPC.c	/^} semun;$/;"	t	typeref:union:_semun	file:
+sub	avoidDeadLock.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	deadlock.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	pa.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	pb.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	pc.c	/^sub(char *fileVar,int i) {$/;"	f
+sub	preventionPC.c	/^sub(char *fileVar,int i) {$/;"	f
+think	avoidDeadLock.c	/^void think(int time)$/;"	f
+think	deadlock.c	/^void think(int time)$/;"	f
+think	pa.c	/^void think(int time)$/;"	f
+think	pb.c	/^void think(int time)$/;"	f
+think	pc.c	/^void think(int time)$/;"	f
+think	preventionPC.c	/^void think(int time)$/;"	f
+thinking_time	avoidDeadLock.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	deadlock.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	pa.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	pb.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	pc.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+thinking_time	preventionPC.c	/^    int thinking_time;$/;"	m	struct:_process	file:
+v	avoidDeadLock.c	/^int v (int semid)$/;"	f
+v	deadlock.c	/^int v (int semid)$/;"	f
+v	pa.c	/^int v (int semid)$/;"	f
+v	pb.c	/^int v (int semid)$/;"	f
+v	pc.c	/^int v (int semid)$/;"	f
+v	preventionPC.c	/^int v (int semid)$/;"	f
+val	avoidDeadLock.c	/^     int val;$/;"	m	union:_semun	file:
+val	deadlock.c	/^     int val;$/;"	m	union:_semun	file:
+val	pa.c	/^     int val;$/;"	m	union:_semun	file:
+val	pb.c	/^     int val;$/;"	m	union:_semun	file:
+val	pc.c	/^     int val;$/;"	m	union:_semun	file:
+val	preventionPC.c	/^     int val;$/;"	m	union:_semun	file:
