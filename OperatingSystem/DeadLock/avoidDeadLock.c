@@ -128,7 +128,22 @@ int Load(char *fileVar) {
     fclose(in);
     return last_num;
 }
-
+int Pre_Load(char *fileVar)
+{
+// fileVar 화일의 마지막 직전 값을 읽어 온다 => process 넘버를 가져온다.
+    FILE * in = fopen(fileVar , "r");
+    int last_num;
+    int pre_last_num;
+    while(1)
+    {
+        fscanf(in,"%d",&last_num);
+        if(feof(in))
+            break;
+        pre_last_num = last_num;
+    }
+    fclose(in);
+    return pre_last_num;
+}
 add(char *fileVar,int i) {
 // fileVar 화일의 마지막 값을 읽어서 i를 더한 후에 이를 끝에 append 한다.
     int last_num = Load(fileVar);
@@ -233,10 +248,36 @@ void eat(int time)
 {
 	sleep(time);
 }
+int Check_Another_Chop(ProcessInfo * prc, char* file1, char* file2)
+{
+    int val;
+    if( (Load(file1) == 0) && (Load(file2) == 0)) // is this last chopstick?
+    {
+        if(Pre_Load(file1) == Pre_Load(file2)) // is there anyone who has two chopstick?
+        {
+            val = 1;
+        }
+        else if( ((int)Pre_Load(file1)==(int)(prc->pid)) ||  ((int)Pre_Load(file2)==(int)(prc->pid))) // if I already have one chopstick?
+        {
+            val = 1;
+        }
+        else
+        {
+            val = 0;
+        }
+    }
+    else
+    {
+        val = 1;
+    }
+    return val;
+}
 void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)
 {
     Acquire(lock);
-	while (Load(R1_F)==0) // R1이 1이면 젓가락이 있고 0이면 젓가락이 없어서 기다려야 함
+    // R1이 1이면 젓가락이 있고 0이면 젓가락이 없어서 기다려야 함
+    // 추가 적으로, Check_Another_Chop 함수를 이용해서, Avoiding 구현!
+	while (Load(R1_F)==0 || !(Check_Another_Chop(prc,R2_F,R3_F)))
     {
 		printf("%s is waiting R1.. \n",prc->name); // print message: getpid()가 R1을 기다림
         Wait(prc,c,lock,R1_Q);
@@ -247,18 +288,18 @@ void Take_R1(ProcessInfo * prc , Lock *lock ,CondVar * c)
     Release(lock);
 }
 
-void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c , Lock * release1, Lock * release2)
+void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c )
 {
     Acquire(lock);
-    Release(release1);
-    Release(release2);
-    while (Load(R2_F)==0) // R2가 1이면 젓가락이 있고 0이면 젓가락이 없어서 기다려야 함
+    // R2가 1이면 젓가락이 있고 0이면 젓가락이 없어서 기다려야 함
+    // 추가 적으로, Check_Another_Chop 함수를 이용해서, Avoiding 구현!
+    while (Load(R2_F)==0 || !(Check_Another_Chop(prc,R1_F,R3_F)))
     {
 		printf("%s is waiting R2.. \n",prc->name); // print message: getpid()가 R2을 기다림
         Wait(prc,c,lock,R2_Q);
 	    printf("%s is wake up for R2.. \n",prc->name); // print message: getpid()가 R2을 기다리다가 깨어남
     }
-    AppendToFile(prc,0,R2_F); //Store(R2,0) 대신에 파일에 어느 철학자 인지와 값을 저장해 놓음
+    AppendToFile(prc,0,R2_F); //Store(R2,0) 대신, 파일에 어느 철학자 인지와 값을 저장해 놓음
     printf("%s bring R2 !! \n",prc->name);// print message: getpid()가  R2을 가져옴
     Release(lock);
 }
@@ -266,7 +307,9 @@ void Take_R2(ProcessInfo * prc , Lock *lock ,CondVar * c , Lock * release1, Lock
 void Take_R3(ProcessInfo * prc , Lock *lock ,CondVar * c )
 {
     Acquire(lock);
-    while (Load(R3_F)==0) // R3가 1이면 젓가락이 있고 0이면 젓가락이 없어서 기다려야 함
+    // R2가 1이면 젓가락이 있고 0이면 젓가락이 없어서 기다려야 함
+    // 추가 적으로, Check_Another_Chop 함수를 이용해서, Avoiding 구현!
+    while (Load(R3_F)==0 || !(Check_Another_Chop(prc,R1_F,R2_F)))
     {
 		printf("%s is waiting R3.. \n",prc->name); // print message: getpid()가 R3을 기다림
         Wait(prc,c,lock,R3_Q);
@@ -306,98 +349,45 @@ void Put_R3(ProcessInfo * prc , Lock *lock, CondVar *c)
     Release(lock);
 }
 
-Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar *con_r2)
+Phil_A(ProcessInfo *prc ,Lock *lock,CondVar *con_r1 , CondVar *con_r2)
 {	
-    Take_R1(prc,lock_r1,con_r1);
+    Take_R1(prc,lock,con_r1);
     printf("%s start thinking .. \n",prc->name); // print message: getpid()가  생각을 시작함
     think(prc->thinking_time);
     printf("%s stop thinking .. \n",prc->name); // print message: getpid()가  생각을 멈춤
-    Take_R2(prc,lock_r2,con_r2);
+    Take_R2(prc,lock,con_r2);
     printf("%s start eating .. \n",prc->name); // print message: getpid()가  먹기 시작함
     eat(prc->eating_time);
     printf("%s stop eating .. \n",prc->name); // print message: getpid()가  먹기를 멈춤
-    Put_R1(prc,lock_r1,con_r1);
-    Put_R2(prc,lock_r2,con_r2);
+    Put_R1(prc,lock,con_r1);
+    Put_R2(prc,lock,con_r2);
 }
 
-int Pre_Load(char *fileVar)
-{
-// fileVar 화일의 마지막 직전 값을 읽어 온다 => process 넘버를 가져온다.
-    FILE * in = fopen(fileVar , "r");
-    int last_num;
-    int pre_last_num;
-    while(1)
-    {
-        fscanf(in,"%d",&last_num);
-        if(feof(in))
-            break;
-        pre_last_num = last_num;
-    }
-    fclose(in);
-    return pre_last_num;
-}
-
-int Check_Another_Chop(Lock *lock1,Lock *lock2, char* file1, char* file2)
-{
-    Acquire(lock1);
-    Acquire(lock2);
-    int val;
-    if( (Load(file1) == 0) && (Load(file2) == 0)) // is this last chopstick?
-    {
-        if(Pre_Load(file1) == Pre_Load(file2)) // is there anyone who has two chopstick?
-        {
-            val = 1;
-        }
-        else
-        {
-            val = 0;
-        }
-    }
-    else
-    {
-        val = 1;
-    }
-    //완벽한 동기화를 위해서, release 는 이 함수 바깥에서 합니다.
-    return val;
-}
-Phil_B(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r1, CondVar *con_r2 , CondVar *con_r3)
-{
-    while(1)
-    {
-        if(Check_Another_Chop(lock_r1,lock_r3, R1_F, R3_F)) // Check_Another_Chop 은 지금 잡으려고 하는 젓가락을 들수 있으면 true 아니면 false 를 반환한다
-        {
-            Take_R2(prc,lock_r2,con_r2, lock_r1,lock_r3);
-            break;
-        }
-        else
-        {
-            Release(lock_r1);
-            Release(lock_r3);
-            continue;
-        }
-    }
-    printf("%s start thinking .. \n",prc->name); // print message: getpid()가  생각을 시작함
-    think(prc->thinking_time);
-    printf("%s stop thinking .. \n",prc->name); // print message: getpid()가  생각을 멈춤
-    Take_R3(prc,lock_r3,con_r3);
-    printf("%s start eating .. \n",prc->name); // print message: getpid()가  먹기 시작함
-    eat(prc->eating_time);
-    printf("%s stop eating .. \n",prc->name); // print message: getpid()가  먹기를 멈춤
-    Put_R2(prc,lock_r2,con_r2);
-    Put_R3(prc,lock_r3,con_r3);
-}
-Phil_C(ProcessInfo *prc ,Lock *lock_r3, Lock *lock_r1 ,CondVar *con_r3 , CondVar *con_r1)
+Phil_B(ProcessInfo *prc ,Lock *lock ,CondVar *con_r2 , CondVar *con_r3)
 {	
-    Take_R3(prc,lock_r3,con_r3);
+    Take_R2(prc,lock,con_r2);
     printf("%s start thinking .. \n",prc->name); // print message: getpid()가  생각을 시작함
     think(prc->thinking_time);
     printf("%s stop thinking .. \n",prc->name); // print message: getpid()가  생각을 멈춤
-    Take_R1(prc,lock_r1,con_r1);
+    Take_R3(prc,lock,con_r3);
     printf("%s start eating .. \n",prc->name); // print message: getpid()가  먹기 시작함
     eat(prc->eating_time);
     printf("%s stop eating .. \n",prc->name); // print message: getpid()가  먹기를 멈춤
-    Put_R3(prc,lock_r3,con_r3);
-    Put_R1(prc,lock_r1,con_r1);
+    Put_R2(prc,lock,con_r2);
+    Put_R3(prc,lock,con_r3);
+}
+Phil_C(ProcessInfo *prc ,Lock *lock,CondVar *con_r3 , CondVar *con_r1)
+{	
+    Take_R3(prc,lock,con_r3);
+    printf("%s start thinking .. \n",prc->name); // print message: getpid()가  생각을 시작함
+    think(prc->thinking_time);
+    printf("%s stop thinking .. \n",prc->name); // print message: getpid()가  생각을 멈춤
+    Take_R1(prc,lock,con_r1);
+    printf("%s start eating .. \n",prc->name); // print message: getpid()가  먹기 시작함
+    eat(prc->eating_time);
+    printf("%s stop eating .. \n",prc->name); // print message: getpid()가  먹기를 멈춤
+    Put_R3(prc,lock,con_r3);
+    Put_R1(prc,lock,con_r1);
 }
 
 void main(void)
@@ -406,23 +396,17 @@ void main(void)
     //  $ ipcrm -s <semid>     // <semid>라는 세마포 제거
 
     //init Lock r1,r2,r3 
-    Lock lock_r1;      // Lock for R1.txt
-    Lock lock_r2;      // Lock for R2.txt
-    Lock lock_r3;      // Lock for R3.txt
-    key_t lock_r1_key = 0x200; 
-    key_t lock_r2_key = 0x201; 
-    key_t lock_r3_key = 0x202;
-    initLock(&lock_r1,lock_r1_key);
-    initLock(&lock_r2,lock_r2_key);
-    initLock(&lock_r3,lock_r3_key);
+    Lock lock;      // Lock for R1.txt
+    key_t lock_key = 0x200; 
+    initLock(&lock,lock_key);
     
     //init Convar r1,r2,r3
     CondVar con_r1;        // Con for R1
     CondVar con_r2;        // Con for R2
     CondVar con_r3;        // Con for R3
-    key_t con_r1_key = 0x203;
-    key_t con_r2_key = 0x204;
-    key_t con_r3_key = 0x205;
+    key_t con_r1_key = 0x201;
+    key_t con_r2_key = 0x202;
+    key_t con_r3_key = 0x203;
     initCondVar(&con_r1,con_r1_key,R1_Q);
     initCondVar(&con_r2,con_r2_key,R2_Q);
     initCondVar(&con_r3,con_r3_key,R3_Q);
@@ -433,7 +417,11 @@ void main(void)
     initProcessInfo(&prc,1,1,"Philo_B");
     //파일 초기화가 엮이지 않게 하기위해서, sleep 을 잠깐 걸어둡니다.
     sleep(1);
-    //
+    //정상적인 실행을 위해 3개의 프로세스로 돌려야합니다.
+    //아래 3명의 철학자를 선택할때, 이 셋 중에 한개를 for문 아래에 써주세요.
+    //Phil_A(&prc,&lock,&con_r1,&con_r2);
+    //Phil_B(&prc,&lock,&con_r2,&con_r3);
+    //Phil_C(&prc,&lock,&con_r3,&con_r1);
     for(int i=0;i<100;i++)
-        Phil_B(&prc,&lock_r1,&lock_r2,&lock_r3,&con_r1,&con_r2,&con_r3);
+        Phil_B(&prc,&lock,&con_r2,&con_r3);
 }

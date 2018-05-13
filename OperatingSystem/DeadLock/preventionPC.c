@@ -470,7 +470,12 @@ void main(void)
     initProcessInfo(&prc,1,1,"Philo_C");
     //파일 초기화가 엮이지 않게 하기위해서, sleep 을 잠깐 걸어둡니다.
     sleep(1);
-    //
+    
+    //정상적인 실행을 위해 3개의 프로세스로 돌려야합니다.
+    //아래 3명의 철학자를 선택할때, 이 셋 중에 한개를 for문 아래에 써주세요.
+    //Phil_A(&prc,&lock_r1,&lock_r2,&con_r1,&con_r2);
+    //Phil_B(&prc,&lock_r2,&lock_r3,&con_r2,&con_r3);
+    //Phil_C(&prc,&lock_r1,&lock_r3,&con_r1,&con_r3);
     for(int i=0;i<20;i++)
         Phil_C(&prc,&lock_r1,&lock_r3,&con_r1,&con_r3);
 }
