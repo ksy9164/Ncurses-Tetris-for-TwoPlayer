@@ -318,7 +318,7 @@ Phil_A(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2 ,CondVar *con_r1 , CondVar
     Put_R2(prc,lock_r2,con_r2);
 }
 
-Phil_B(ProcessInfo *prc ,Lock *lock_r1, Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r1, CondVar *con_r2 , CondVar *con_r3)
+Phil_B(ProcessInfo *prc ,Lock *lock_r2, Lock *lock_r3 ,CondVar *con_r2 , CondVar *con_r3)
 {	
     Take_R2(prc,lock_r2,con_r2);
     printf("%s start thinking .. \n",prc->name); // print message: getpid()가  생각을 시작함
@@ -375,10 +375,15 @@ void main(void)
     ProcessInfo prc;  // 현재 process 정보
     //process has name , thinking time , eating time
     
-    initProcessInfo(&prc,1,1,"Philo_B");
+    initProcessInfo(&prc,1,1,"Philo_A");
     //파일 초기화가 엮이지 않게 하기위해서, sleep 을 잠깐 걸어둡니다.
     sleep(1);
-    //
+
+    //정상적인 실행을 위해 3개의 프로세스로 돌려야합니다.
+    //아래 3명의 철학자를 선택할때, 이 셋 중에 한개를 for문 아래에 써주세요.
+    //Phil_A(&prc,&lock_r1,&lock_r2,&con_r1,&con_r2);
+    //Phil_B(&prc,&lock_r2,&lock_r3,&con_r2,&con_r3);
+    //Phil_C(&prc,&lock_r3,&lock_r1,&con_r3,&con_r1);
     for(int i=0;i<100;i++)
-        Phil_B(&prc,&lock_r1,&lock_r2,&lock_r3,&con_r1,&con_r2,&con_r3);
+        Phil_A(&prc,&lock_r1,&lock_r2,&con_r1,&con_r2);
 }
