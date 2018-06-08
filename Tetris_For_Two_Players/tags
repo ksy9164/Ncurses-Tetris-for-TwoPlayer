@@ -1,0 +1,117 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BoardPane	tetris.h	/^ 	BoardPane(int y, int x, int h, int w) : Pane(y,x,h,w)$/;"	f	class:BoardPane
+BoardPane	tetris.h	/^class BoardPane : public Pane$/;"	c
+CC	Makefile	/^CC = g++$/;"	m
+EndPane	tetris.h	/^ 	EndPane(int y, int x, int h, int w,int win) : Pane(y,x,h,w)$/;"	f	class:EndPane
+EndPane	tetris.h	/^class EndPane : public Pane$/;"	c
+HIGHT	tetris.h	12;"	d
+InfoPane	tetris.h	/^ 	InfoPane(int y, int x, int h, int w) : Pane(y,x,h,w)$/;"	f	class:InfoPane
+InfoPane	tetris.h	/^class InfoPane : public Pane$/;"	c
+LDFLAGS	Makefile	/^LDFLAGS = -lncurses -std=c++11$/;"	m
+NextPane	tetris.h	/^ 	NextPane(int y, int x, int h, int w, int ran) : Pane(y,x,h,w){block_rand=ran;}$/;"	f	class:NextPane
+NextPane	tetris.h	/^class NextPane : public Pane$/;"	c
+Pane	Pane.cpp	/^Pane::Pane(int y, int x, int h, int w) :y_(y), x_(x),height_(h),width_(w)$/;"	f	class:Pane
+Pane	tetris.h	/^class Pane$/;"	c
+SOURCES	Makefile	/^SOURCES = Tetris.cpp Pane.cpp BoardPane.cpp InfoPane.cpp EndPane.cpp StatePane.cpp NextPane.cpp main.cpp TimerPane.cpp$/;"	m
+StatePane	tetris.h	/^ 	StatePane(int y, int x, int h, int w) : Pane(y,x,h,w){score=0;status=0;}$/;"	f	class:StatePane
+StatePane	tetris.h	/^class StatePane : public Pane$/;"	c
+TARGET	Makefile	/^TARGET = tetris$/;"	m
+TIME_LIMIT	tetris.h	13;"	d
+Tetris	Tetris.cpp	/^Tetris::Tetris()$/;"	f	class:Tetris
+Tetris	tetris.h	/^class Tetris$/;"	c
+TimerPane	tetris.h	/^ 	TimerPane(int y, int x, int h, int w) : Pane(y,x,h,w)$/;"	f	class:TimerPane
+TimerPane	tetris.h	/^class TimerPane : public Pane$/;"	c
+WIDTH	tetris.h	11;"	d
+__TET_H__	BoardPane.cpp	2;"	d	file:
+__TET_H__	EndPane.cpp	2;"	d	file:
+__TET_H__	InfoPane.cpp	2;"	d	file:
+__TET_H__	NextPane.cpp	2;"	d	file:
+__TET_H__	Pane.cpp	2;"	d	file:
+__TET_H__	StatePane.cpp	2;"	d	file:
+__TET_H__	Tetris.cpp	2;"	d	file:
+__TET_H__	TimerPane.cpp	2;"	d	file:
+__TET_H__	main.cpp	2;"	d	file:
+add_score	tetris.h	/^    void add_score(int s){score += s;}$/;"	f	class:StatePane
+base_screen_show	Tetris.cpp	/^void Tetris::base_screen_show()$/;"	f	class:Tetris
+block	tetris.h	/^    int block[5][5]; \/\/현재 블록의 시각화 형태 자료$/;"	m	class:BoardPane
+block_data	tetris.h	/^    int block_data[5][10]; \/\/블록이 보드에 적혀질때의 자료, 즉,ncurses 화면을 고려한 배열$/;"	m	class:BoardPane
+block_info	tetris.h	/^    int block_info[7][5][5]={$/;"	m	class:NextPane
+block_next_block	tetris.h	/^    int block_next_block[5][5]; \/\/ 다음 블록의 시각화 형태 자료$/;"	m	class:NextPane
+block_num	tetris.h	/^    int block_num; \/\/현재블록의 종류 번호$/;"	m	class:BoardPane
+block_num	tetris.h	/^    int block_num;$/;"	m	struct:board_data
+block_rand	tetris.h	/^    int block_rand;$/;"	m	class:NextPane
+board	tetris.h	/^    board_data board[HIGHT+4][WIDTH]; \/\/보드판$/;"	m	class:BoardPane
+board_data	tetris.h	/^typedef struct board_data$/;"	s
+board_data	tetris.h	/^}board_data;$/;"	t	typeref:struct:board_data
+bomb	BoardPane.cpp	/^int BoardPane::bomb(StatePane * anotherPlayer)$/;"	f	class:BoardPane
+can_move	BoardPane.cpp	/^bool BoardPane::can_move(int y, int x)$/;"	f	class:BoardPane
+check	tetris.h	/^    bool check;$/;"	m	class:BoardPane
+check	tetris.h	/^    int check;$/;"	m	struct:board_data
+check_time	StatePane.cpp	/^void StatePane::check_time(TimerPane * timer)$/;"	f	class:StatePane
+color	tetris.h	/^    int color;$/;"	m	struct:board_data
+control	Tetris.cpp	/^void Tetris::control(int input)$/;"	f	class:Tetris
+cpy_next	NextPane.cpp	/^void NextPane::cpy_next(BoardPane * boardpane)$/;"	f	class:NextPane
+dead_time_sec	tetris.h	/^    int dead_time_sec;$/;"	m	class:TimerPane
+dead_time_usec	tetris.h	/^    int dead_time_usec;$/;"	m	class:TimerPane
+detect	Tetris.cpp	/^int Tetris::detect(BoardPane * player1 , BoardPane * player2)$/;"	f	class:Tetris
+draw	BoardPane.cpp	/^void BoardPane::draw()$/;"	f	class:BoardPane
+draw	EndPane.cpp	/^void EndPane::draw()$/;"	f	class:EndPane
+draw	InfoPane.cpp	/^void InfoPane::draw()$/;"	f	class:InfoPane
+draw	NextPane.cpp	/^void NextPane::draw()$/;"	f	class:NextPane
+draw	Pane.cpp	/^void Pane::draw()$/;"	f	class:Pane
+draw	StatePane.cpp	/^void StatePane::draw()$/;"	f	class:StatePane
+draw	TimerPane.cpp	/^void TimerPane::draw()$/;"	f	class:TimerPane
+end	tetris.h	/^    struct timeval st,end;$/;"	m	class:TimerPane	typeref:struct:TimerPane::
+freezing	BoardPane.cpp	/^void BoardPane::freezing()$/;"	f	class:BoardPane
+height_	tetris.h	/^ 	int width_, height_;$/;"	m	class:Pane
+id	tetris.h	/^    const char *id[3] = {{"Player 2 win!!"},{"Player 1 win!!"},{"    draw!!"}};$/;"	m	class:EndPane
+infoPane_	tetris.h	/^    InfoPane *infoPane_;$/;"	m	class:Tetris
+is_touch	BoardPane.cpp	/^bool BoardPane::is_touch()$/;"	f	class:BoardPane
+item	tetris.h	/^    int item;$/;"	m	struct:board_data
+level	tetris.h	/^    int level;$/;"	m	class:Tetris
+main	main.cpp	/^int main()$/;"	f
+make_block	NextPane.cpp	/^void NextPane::make_block()$/;"	f	class:NextPane
+make_data	BoardPane.cpp	/^void BoardPane::make_data()$/;"	f	class:BoardPane
+make_timeterm	Tetris.cpp	/^void Tetris::make_timeterm()$/;"	f	class:Tetris
+make_transe	StatePane.cpp	/^void StatePane::make_transe()$/;"	f	class:StatePane
+mv_block	BoardPane.cpp	/^void BoardPane::mv_block(int go)$/;"	f	class:BoardPane
+next_1	tetris.h	/^    NextPane *next_1;$/;"	m	class:Tetris
+next_2	tetris.h	/^    NextPane *next_2;$/;"	m	class:Tetris
+next_block_num	tetris.h	/^    int next_block_num; \/\/다음 블록의 종류 번호$/;"	m	class:NextPane
+play	Tetris.cpp	/^int Tetris::play()$/;"	f	class:Tetris
+player_1	tetris.h	/^    BoardPane *player_1;$/;"	m	class:Tetris
+player_2	tetris.h	/^    BoardPane *player_2;$/;"	m	class:Tetris
+return_score	tetris.h	/^    int return_score(void){return score;}$/;"	f	class:StatePane
+rotate_num	tetris.h	/^    int rotate_num;$/;"	m	struct:board_data
+rotation	BoardPane.cpp	/^void BoardPane::rotation()$/;"	f	class:BoardPane
+score	tetris.h	/^    int score;$/;"	m	class:StatePane
+show_ghost	BoardPane.cpp	/^void BoardPane::show_ghost()$/;"	f	class:BoardPane
+show_info	Tetris.cpp	/^void Tetris::show_info()$/;"	f	class:Tetris
+st	tetris.h	/^    struct timeval st,end;$/;"	m	class:TimerPane	typeref:struct:TimerPane::timeval
+state_1	tetris.h	/^    StatePane *state_1;$/;"	m	class:Tetris
+state_2	tetris.h	/^    StatePane *state_2;$/;"	m	class:Tetris
+status	tetris.h	/^    int status;$/;"	m	class:StatePane
+table	tetris.h	/^    const char *table[2]={{"normal"},{"transe"}};$/;"	m	class:StatePane
+time_return	TimerPane.cpp	/^int TimerPane::time_return()$/;"	f	class:TimerPane
+timer	tetris.h	/^    TimerPane *timer;$/;"	m	class:Tetris
+transe	tetris.h	/^    struct timeval transe;$/;"	m	class:StatePane	typeref:struct:StatePane::timeval
+transe_bomb	BoardPane.cpp	/^int BoardPane::transe_bomb()$/;"	f	class:BoardPane
+transe_draw	BoardPane.cpp	/^void BoardPane::transe_draw()$/;"	f	class:BoardPane
+updateScreen	Tetris.cpp	/^void Tetris::updateScreen()$/;"	f	class:Tetris
+width_	tetris.h	/^ 	int width_, height_;$/;"	m	class:Pane
+win_	tetris.h	/^ 	WINDOW *win_;$/;"	m	class:Pane
+win_num	tetris.h	/^    int win_num;$/;"	m	class:EndPane
+x_	tetris.h	/^ 	int x_, y_;$/;"	m	class:Pane
+y_	tetris.h	/^ 	int x_, y_;$/;"	m	class:Pane
+~BoardPane	tetris.h	/^    ~BoardPane()$/;"	f	class:BoardPane
+~InfoPane	tetris.h	/^    ~InfoPane()$/;"	f	class:InfoPane
+~NextPane	tetris.h	/^    ~NextPane()$/;"	f	class:NextPane
+~Pane	tetris.h	/^ 	~Pane()$/;"	f	class:Pane
+~StatePane	tetris.h	/^    ~StatePane()$/;"	f	class:StatePane
+~Tetris	Tetris.cpp	/^Tetris::~Tetris()$/;"	f	class:Tetris
+~TimerPane	tetris.h	/^    ~TimerPane()$/;"	f	class:TimerPane

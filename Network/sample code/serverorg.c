@@ -35,11 +35,14 @@ int main(int argc, char *argv[])
 		fprintf(stderr,"%s: unknown service\n", "tcp");
 		exit(1);
 	}
+
+
 	memset((void *) &server, 0, sizeof server);
 	server.sin_family = AF_INET;
-	server.sin_addr.s_addr = INADDR_ANY;
+//	server.sin_addr.s_addr = INADDR_ANY;
 	server.sin_port = servp->s_port;
-	if (bind(request_sock, (struct sockaddr *)&server, sizeof server) < 0) {
+	
+    if (bind(request_sock, (struct sockaddr *)&server, sizeof server) < 0) {
 		perror("bind");
 		exit(1);
 	}
